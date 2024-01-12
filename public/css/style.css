@@ -1,5 +1,6 @@
 * {
     box-sizing: border-box;
+    letter-spacing: 1px;
 }
 
 body {
@@ -13,12 +14,50 @@ body {
 p {
     font-size: .9em;
     margin-bottom: 10px;
-    letter-spacing: 1px;
 }
 
 a {
+    font-size: .9em;
     color: #333;
     text-decoration: none;
+    cursor: pointer;
+}
+
+a:hover {
+    color: #e85d04;
+}
+
+nav {
+    display: flex;
+    justify-content: flex-end;
+}
+
+nav a {
+    text-transform: uppercase;
+}
+
+main {
+    margin-top: 50px;
+}
+
+#search-container {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+#ingredients {
+    width: 250px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: 1px solid #333;
+}
+
+#time {
+    width: 200px;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 h1 {

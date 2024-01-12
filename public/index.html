@@ -3,10 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=DM+Serif+Display">
+    <link rel="stylesheet" href="./css/style.css">
     <script src="./js/script.js" defer></script>
-    <title>Document</title>
+    <title>Quick Chef</title>
 </head>
+
 <body>
-    <h1>Hi</h1>
+    <header>
+        <h1>Welcome to Quick Chef!</h1>
+        <nav>
+            <a id="favorites">My Favorites</a>
+        </nav>
+    </header>
+    <main>
+        <section id="search-container">
+            <input type="text" id="ingredient-search" placeholder="Search by ingredient">
+            <input type="range" min="10" max="45" id="time">
+        </section>
+    </main>
 </body>
 </html>

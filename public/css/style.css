@@ -55,9 +55,29 @@ main {
 }
 
 #time {
+    appearance: none;
     width: 200px;
-    border-radius: 5px;
+    height: 8px;
+    margin-top: 15px;
+    border-radius: 30px;
     cursor: pointer;
+    background-color: #faa307;
+    border: 1px solid #333;
+    opacity: .8
+}
+
+#time::-webkit-slider-thumb {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: #faa307;
+    border: 1px solid #333;
+    cursor: pointer;
+}
+
+#time:hover {
+    opacity: 1;
 }
 
 h1 {

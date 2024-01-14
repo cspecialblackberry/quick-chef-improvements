@@ -89,6 +89,8 @@ main {
 #intolerances {
     width: 250px;
     height: 40px;
+    border-radius: 5px;
+    border: 1px solid #333;
 }
 
 h1 {

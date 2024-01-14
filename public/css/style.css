@@ -80,6 +80,17 @@ main {
     opacity: 1;
 }
 
+#multiselect {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#intolerances {
+    width: 250px;
+    height: 40px;
+}
+
 h1 {
     font-family: 'DM Serif Display', Georgia, 'Times New Roman', Times, serif;
     color: #dc2f02;

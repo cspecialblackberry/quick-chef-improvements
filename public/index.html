@@ -21,6 +21,17 @@
         <section id="search-container">
             <input type="text" id="ingredients" placeholder="Search by ingredient">
             <input type="range" min="10" max="45" id="time">
+            <div id="multiselect">
+                <!-- <label for="intolerances">Any allergies or intolerances?</label> -->
+                <select name="intolerances" id="intolerances" multiple>
+                    <option value="dairy">Dairy</option>
+                    <option value="egg">Egg</option>
+                    <option value="gluten">Gluten</option>
+                    <option value="grain">Grain</option>
+                    <option value="peanut">Peanut</option>
+                    <option value="seafood">Seafood</option>
+                </select>
+            </div>
         </section>
     </main>
 </body>

@@ -1,3 +1,4 @@
+const searchBtn = document.querySelector('#recipe-search');
 const timeSlider = document.querySelector('#time-slider')
 
 let foodInput
@@ -8,7 +9,9 @@ const userSelections = {
     maxReadyTime: 0
 }
 
-
+const findRecipes = () => {
+    createQueryFilters(userSelections);
+}
 
 let baseURL = `https://api.spoonacular.com/recipes/complexSearch?apiKey=36808371f778457eb823b528e2d0a3a6&instructionsRequired=true&sort=random`
 
@@ -41,11 +44,11 @@ const createQueryFilters = (selection) => {
     joinFilters(queryFilters)
 }
 
-createQueryFilters(userSelections)
-
 const ingredients = 'chicken, rice, eggs'
 const ingredients2 = ingredients.split(', ')
 console.log(ingredients2)
+
+searchBtn.addEventListener('click', findRecipes);
 
 
 /**

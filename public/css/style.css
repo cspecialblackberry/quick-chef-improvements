@@ -1,3 +1,113 @@
+* {
+    box-sizing: border-box;
+    letter-spacing: 1px;
+}
+
 body {
-    background-color: red;
+    background-color: #f7feff;
+    font-family: Helvetica, Arial, sans-serif;
+    color: #333;
+    font-size: 16px;
+    padding: 30px;
+}
+
+p {
+    font-size: .9em;
+    margin-bottom: 10px;
+}
+
+a {
+    font-size: .9em;
+    color: #333;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+a:hover {
+    color: #e85d04;
+}
+
+nav {
+    display: flex;
+    justify-content: flex-end;
+}
+
+nav a {
+    text-transform: uppercase;
+}
+
+main {
+    margin-top: 50px;
+}
+
+#search-container {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+#ingredients {
+    width: 250px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: 1px solid #333;
+}
+
+#time-slider {
+    appearance: none;
+    width: 200px;
+    height: 8px;
+    border-radius: 30px;
+    cursor: pointer;
+    background-color: #faa307;
+    border: 1px solid #333;
+    opacity: .8;
+}
+
+#time-slider::-webkit-slider-thumb {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: #faa307;
+    border: 1px solid #333;
+    cursor: pointer;
+}
+
+#time-slider:hover {
+    opacity: 1;
+}
+
+#intolerances {
+    width: 250px;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid #333;
+}
+
+#recipe-search {
+    background-color: #e85d04;
+    color: #fff;
+    width: 250px;
+    border-radius: 5px;
+    border: 1px solid #333;
+    cursor: pointer;
+    padding: 10px 15px;
+    text-transform: uppercase;
+}
+
+#recipe-search:hover {
+    background-color: #dc2f02;
+    transition: 1s;
+}
+
+h1 {
+    font-family: 'DM Serif Display', Georgia, 'Times New Roman', Times, serif;
+    color: #dc2f02;
+    font-size: 3em;
+    margin-bottom: 30px;
+    text-align: center;
 }

@@ -2,7 +2,7 @@ const searchBtn = document.querySelector('#recipe-search');
 const timeSlider = document.querySelector('#time-slider')
 const recipesContainer = document.querySelector('#recipes-container');
 
-let foodInput
+let recipeID = 715415
 
 const userSelections = {
     includeIngredients: [],
@@ -12,7 +12,6 @@ const userSelections = {
 
 const findRecipes = () => {
     createQueryFilters(userSelections);
-    displayRecipes();
 }
 
 let baseURL = `https://api.spoonacular.com/recipes/complexSearch?apiKey=36808371f778457eb823b528e2d0a3a6&instructionsRequired=true&sort=random`
@@ -21,6 +20,8 @@ const getRecipes = async () => {
     const response = await fetch(baseURL)
     const data = await response.json()
     console.log(data)
+    clearResultArea()
+    data.results.forEach(displayRecipes)
 }
 
 const joinFilters = (queryFilters) => {
@@ -52,8 +53,10 @@ console.log(ingredients2)
 
 searchBtn.addEventListener('click', findRecipes);
 
-
-let recipeID = 715415
+const saveClickedID = (event) => {
+    recipeID = event.target.classList[0]
+    getSpecificRecipe()
+}
 
 const getSpecificRecipe = async () => {
     const response = await fetch(`https://api.spoonacular.com/recipes/${recipeID}/information?apiKey=36808371f778457eb823b528e2d0a3a6`)
@@ -61,26 +64,36 @@ const getSpecificRecipe = async () => {
     console.log(data)
 }
 
-getSpecificRecipe()
+// getSpecificRecipe()
 
-const displayRecipes = () => {
+const clearResultArea = () => {
     recipesContainer.textContent = '';
+}
 
+const displayRecipes = (data) => {
+    
     const recipeInfoEl = document.createElement('article');
     const recipeName = document.createElement('h2');
-    const maxReadyTime = document.createElement('p');
+    recipeName.setAttribute('class', data.id)
+    recipeName.addEventListener('click', saveClickedID)
+    console.log(recipeName)
+    // const maxReadyTime = document.createElement('p');
     const recipeImage = document.createElement('img');
 
     recipeName.textContent = data.title;
-    maxReadyTime.textContent = data.readInMinutes;
+    // maxReadyTime.textContent = data.readInMinutes;
     recipeImage.src = data.image;
     // need to adjust these ^^ so they're getting the info
 
     recipesContainer.appendChild(recipeInfoEl);
     recipeInfoEl.appendChild(recipeName);
-    recipeInfoEl.appendChild(maxReadyTime);
+    // recipeInfoEl.appendChild(maxReadyTime);
     recipeInfoEl.appendChild(recipeImage);
 }
+
+const displaySpecificRecipe = (data) => {
+
+} 
 
 /**
  * Uncomment the below code to POST data to the database

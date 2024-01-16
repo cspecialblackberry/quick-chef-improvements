@@ -1,3 +1,4 @@
+const searchBtn = document.querySelector('#recipe-search');
 const timeSlider = document.querySelector('#time-slider')
 
 let foodInput
@@ -8,7 +9,9 @@ const userSelections = {
     maxReadyTime: 0
 }
 
-
+const findRecipes = () => {
+    createQueryFilters(userSelections);
+}
 
 let baseURL = `https://api.spoonacular.com/recipes/complexSearch?apiKey=36808371f778457eb823b528e2d0a3a6&instructionsRequired=true&sort=random`
 
@@ -19,8 +22,8 @@ const getRecipes = async () => {
 }
 
 const joinFilters = (queryFilters) => {
-    let newQueryFilters = queryFilters.slice(0,-1)
-    baseURL+=newQueryFilters
+    let newQueryFilters = queryFilters.slice(0, -1)
+    baseURL += newQueryFilters
     getRecipes(baseURL)
 }
 
@@ -41,12 +44,22 @@ const createQueryFilters = (selection) => {
     joinFilters(queryFilters)
 }
 
-createQueryFilters(userSelections)
-
 const ingredients = 'chicken, rice, eggs'
 const ingredients2 = ingredients.split(', ')
 console.log(ingredients2)
 
+searchBtn.addEventListener('click', findRecipes);
+
+
+let recipeID = 715415
+
+const getSpecificRecipe = async () => {
+    const response = await fetch(`https://api.spoonacular.com/recipes/${recipeID}/information?apiKey=36808371f778457eb823b528e2d0a3a6`)
+    const data = await response.json()
+    console.log(data)
+}
+
+getSpecificRecipe()
 
 /**
  * Uncomment the below code to POST data to the database

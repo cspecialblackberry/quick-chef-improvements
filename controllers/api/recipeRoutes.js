@@ -1,11 +1,11 @@
 const router = require('express').Router();
-const { Trip } = require('../../models');
+const { Recipe } = require('../../models');
 
 router.get('/', async (req, res) => {
   try {
-    const allTrips = await Trip.findAll()
+    const allRecipes = await Recipe.findAll()
 
-    res.status(200).json(allTrips);
+    res.status(200).json(allRecipes);
   } catch (err) {
     res.status(400).json(err);
   }
@@ -13,11 +13,11 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
   try {
-    const newTrip = await Trip.create({
+    const newRecipe = await Recipe.create({
       ...req.body
     });
 
-    res.status(200).json(newTrip);
+    res.status(200).json(newRecipe);
   } catch (err) {
     res.status(400).json(err);
   }
@@ -26,16 +26,16 @@ router.post('/', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
   try {
-    const tripData = await Trip.update(req.body, {
+    const recipeData = await Trip.update(req.body, {
       where: {
         id: req.params.id,
       },
     });
-    if (!tripData[0]) {
+    if (!recipeData[0]) {
       res.status(404).json({ message: 'No trip with this id!' });
       return;
     }
-    res.status(200).json(tripData);
+    res.status(200).json(recipeData);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -43,16 +43,16 @@ router.put('/:id', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
   try {
-    const tripData = await Trip.destroy({
+    const recipeData = await Trip.destroy({
       where: {
         id: req.params.id,
       },
     });
-    if (!tripData) {
-      res.status(404).json({ message: 'No trip with this id!' });
+    if (!recipeData) {
+      res.status(404).json({ message: 'No recipe with this id!' });
       return;
     }
-    res.status(200).json(tripData);
+    res.status(200).json(recipeData);
   } catch (err) {
     res.status(500).json(err);
   }

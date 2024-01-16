@@ -1,5 +1,6 @@
 const searchBtn = document.querySelector('#recipe-search');
 const timeSlider = document.querySelector('#time-slider')
+const recipesContainer = document.querySelector('#recipes-container');
 
 let foodInput
 
@@ -11,6 +12,7 @@ const userSelections = {
 
 const findRecipes = () => {
     createQueryFilters(userSelections);
+    displayRecipes();
 }
 
 let baseURL = `https://api.spoonacular.com/recipes/complexSearch?apiKey=36808371f778457eb823b528e2d0a3a6&instructionsRequired=true&sort=random`
@@ -60,6 +62,25 @@ const getSpecificRecipe = async () => {
 }
 
 getSpecificRecipe()
+
+const displayRecipes = () => {
+    recipesContainer.textContent = '';
+
+    const recipeInfoEl = document.createElement('article');
+    const recipeName = document.createElement('h2');
+    const maxReadyTime = document.createElement('p');
+    const recipeImage = document.createElement('img');
+
+    recipeName.textContent = data.title;
+    maxReadyTime.textContent = data.readInMinutes;
+    recipeImage.src = data.image;
+    // need to adjust these ^^ so they're getting the info
+
+    recipesContainer.appendChild(recipeInfoEl);
+    recipeInfoEl.appendChild(recipeName);
+    recipeInfoEl.appendChild(maxReadyTime);
+    recipeInfoEl.appendChild(recipeImage);
+}
 
 /**
  * Uncomment the below code to POST data to the database

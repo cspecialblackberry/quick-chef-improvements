@@ -1,3 +1,3 @@
-const Trip = require('./Trip');
+const Recipe = require('./Recipe');
 
-module.exports = { Trip };
+module.exports = { Recipe };

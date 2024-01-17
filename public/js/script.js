@@ -14,6 +14,8 @@ let userSelections = {
 const setUserSelections = (event) => {
     userSelections.includeIngredients = ingredientsInput.value.split(' ')
     userSelections.maxReadyTime = timeSlider.value
+    ingredientsInput.value = ''
+    timeSlider.value = 30
 }
 
 searchBtn.addEventListener('click', setUserSelections)
@@ -24,7 +26,7 @@ const findRecipes = () => {
 
 searchBtn.addEventListener('click', findRecipes);
 
-let baseURL = `https://api.spoonacular.com/recipes/complexSearch?apiKey=36808371f778457eb823b528e2d0a3a6&instructionsRequired=true&sort=random`
+let baseURL 
 
 const getRecipes = async () => {
     const response = await fetch(baseURL)
@@ -36,6 +38,7 @@ const getRecipes = async () => {
 
 const joinFilters = (queryFilters) => {
     let newQueryFilters = queryFilters.slice(0, -1)
+    baseURL = `https://api.spoonacular.com/recipes/complexSearch?apiKey=36808371f778457eb823b528e2d0a3a6&instructionsRequired=true&sort=random`
     baseURL += newQueryFilters
     console.log(baseURL)
     getRecipes(baseURL)

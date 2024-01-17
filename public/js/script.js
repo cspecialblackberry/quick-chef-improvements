@@ -1,18 +1,28 @@
 const searchBtn = document.querySelector('#recipe-search');
+const ingredientsInput = document.querySelector('#ingredients')
 const timeSlider = document.querySelector('#time-slider')
 const recipesContainer = document.querySelector('#recipes-container');
 
 let recipeID = 715415
 
-const userSelections = {
+let userSelections = {
     includeIngredients: [],
-    intolerances: ['dairy'],
+    intolerances: [],
     maxReadyTime: 0
 }
+
+const setUserSelections = (event) => {
+    userSelections.includeIngredients = ingredientsInput.value.split(' ')
+    userSelections.maxReadyTime = timeSlider.value
+}
+
+searchBtn.addEventListener('click', setUserSelections)
 
 const findRecipes = () => {
     createQueryFilters(userSelections);
 }
+
+searchBtn.addEventListener('click', findRecipes);
 
 let baseURL = `https://api.spoonacular.com/recipes/complexSearch?apiKey=36808371f778457eb823b528e2d0a3a6&instructionsRequired=true&sort=random`
 
@@ -27,6 +37,7 @@ const getRecipes = async () => {
 const joinFilters = (queryFilters) => {
     let newQueryFilters = queryFilters.slice(0, -1)
     baseURL += newQueryFilters
+    console.log(baseURL)
     getRecipes(baseURL)
 }
 
@@ -47,34 +58,35 @@ const createQueryFilters = (selection) => {
     joinFilters(queryFilters)
 }
 
-const ingredients = 'chicken, rice, eggs'
-const ingredients2 = ingredients.split(', ')
-console.log(ingredients2)
 
-searchBtn.addEventListener('click', findRecipes);
+
 
 const saveClickedID = (event) => {
-    recipeID = event.target.classList[0]
+    recipeID = event.target.id
     getSpecificRecipe()
 }
+
 
 const getSpecificRecipe = async () => {
     const response = await fetch(`https://api.spoonacular.com/recipes/${recipeID}/information?apiKey=36808371f778457eb823b528e2d0a3a6`)
     const data = await response.json()
     console.log(data)
+    clearResultArea()
+    displaySpecificRecipe(data)
 }
 
-// getSpecificRecipe()
 
 const clearResultArea = () => {
     recipesContainer.textContent = '';
 }
 
+
 const displayRecipes = (data) => {
     
     const recipeInfoEl = document.createElement('article');
     const recipeName = document.createElement('h2');
-    recipeName.setAttribute('class', data.id)
+    recipeName.setAttribute('id', data.id)
+    recipeName.setAttribute('class', 'recipe-name')
     recipeName.addEventListener('click', saveClickedID)
     console.log(recipeName)
     // const maxReadyTime = document.createElement('p');
@@ -92,7 +104,62 @@ const displayRecipes = (data) => {
 }
 
 const displaySpecificRecipe = (data) => {
+    
+    const recipeInfoEl = document.createElement('article')
+    const recipeName = document.createElement('h2')
+    const favoriteButton = document.createElement('button')
+    const cookTime = document.createElement('p')
+    const dietsTitle = document.createElement('ul')
+    const diets = document.createElement('ul')
+    const recipeImage = document.createElement('img')
+    const ingredientsTitle = document.createElement('p')
+    const ingredients = document.createElement('ul')
+    const instructionsTitle = document.createElement('p')
+    const instructions = document.createElement('ol')
 
+    recipeName.textContent = data.title
+    favoriteButton.textContent = 'Favorite'
+    cookTime.textContent = "Ready in " + data.readyInMinutes + " minutes."
+    dietsTitle.textContent = "Diets:"
+    recipeImage.src = data.image
+    ingredientsTitle.textContent = "Ingredients:"
+    instructionsTitle.textContent = "Instructions:"
+
+    const createDietList = (data) => {
+        const diet = document.createElement('li')
+        diet.textContent = data
+        diets.appendChild(diet)
+    }
+
+    data.diets.forEach(createDietList)
+
+    const createIngredientsList = (data) => {
+        const ingredient = document.createElement('li')
+        ingredient.textContent = data.name
+        ingredients.appendChild(ingredient)
+    }
+
+    data.extendedIngredients.forEach(createIngredientsList)
+
+    const createInstructionsList = (data) => {
+        const instruction = document.createElement('li')
+        instruction.textContent = data.step
+        instructions.appendChild(instruction)
+    }
+
+    data.analyzedInstructions[0].steps.forEach(createInstructionsList)
+
+    recipesContainer.appendChild(recipeInfoEl)
+    recipeInfoEl.appendChild(recipeName)
+    recipeInfoEl.appendChild(favoriteButton)
+    recipeInfoEl.appendChild(cookTime)
+    recipeInfoEl.appendChild(dietsTitle)
+    recipeInfoEl.appendChild(diets)
+    recipeInfoEl.appendChild(recipeImage)
+    recipeInfoEl.appendChild(ingredientsTitle)
+    recipeInfoEl.appendChild(ingredients)
+    recipeInfoEl.appendChild(instructionsTitle)
+    recipeInfoEl.appendChild(instructions)
 } 
 
 /**

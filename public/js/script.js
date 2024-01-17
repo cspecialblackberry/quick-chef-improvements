@@ -112,12 +112,12 @@ const displaySpecificRecipe = (data) => {
     const recipeName = document.createElement('h2')
     const favoriteButton = document.createElement('button')
     const cookTime = document.createElement('p')
-    const dietsTitle = document.createElement('ul')
+    const dietsTitle = document.createElement('h3')
     const diets = document.createElement('ul')
     const recipeImage = document.createElement('img')
-    const ingredientsTitle = document.createElement('p')
+    const ingredientsTitle = document.createElement('h3')
     const ingredients = document.createElement('ul')
-    const instructionsTitle = document.createElement('p')
+    const instructionsTitle = document.createElement('h3')
     const instructions = document.createElement('ol')
 
     recipeName.textContent = data.title

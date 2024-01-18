@@ -168,3 +168,52 @@ h3 {
 .recipe-name:hover {
     cursor: pointer;
 }
+
+.weekday-div {
+    margin-top: 20px;
+    display: flex; 
+    padding: 10px;
+    border: 2px solid;
+    flex-direction: column;
+}
+
+.weekday-section {
+    background-color: #e85d04;
+    height: 200px;
+    width: 100%;
+    display: flex;
+    border-width: 1.5px 3px;
+    border-style: solid;
+}
+
+.input-section {
+    display: flex;
+    width: 25%;
+    border-right: 2px solid;
+}
+
+.input-section h2 {
+    color: black;
+    font-size: 1.7em;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    text-align: center;
+}
+
+.input-section select {
+    width: 250px;
+    height: 55px;
+    border-radius: 5px;
+    border: 1px solid #333;  
+}
+
+.recipe-section {
+    display: flex;
+    width: 60%;
+    border-right: 2px solid;
+}
+
+.clear-section {
+    display: flex;
+    width: 15%
+}

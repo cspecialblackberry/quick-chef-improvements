@@ -131,6 +131,19 @@ const displaySpecificRecipe = (data) => {
     ingredientsTitle.textContent = "Ingredients:"
     instructionsTitle.textContent = "Instructions:"
 
+    const storeFavorite = () => {
+        let newFavorite = {
+            name: data.title,
+            image: data.image,
+            recipeId: data.id,
+            comments: 'this was great!'
+        }
+        console.log(newFavorite)
+        postRecipes(newFavorite);
+    }
+
+    favoriteButton.addEventListener('click', storeFavorite);
+
     const createDietList = (data) => {
         const diet = document.createElement('li')
         diet.textContent = data
@@ -168,55 +181,39 @@ const displaySpecificRecipe = (data) => {
     recipeInfoEl.appendChild(instructions)
 } 
 
-const getRandom = async () => {
-    const response = await fetch('https://api.spoonacular.com/recipes/random?apiKey=36808371f778457eb823b528e2d0a3a6&number=10')
+const postRecipes = async(recipeObj) => {
+    const response = await fetch('/api/recipe', {
+        method: 'POST',
+        body: JSON.stringify(recipeObj),
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    })
+
     const data = await response.json()
+
     console.log(data)
 }
 
-// getRandom()
-
-
-
-
-/**
- * Uncomment the below code to POST data to the database
- */
-
-
-// const postTrips = async(tripObj) => {
-//     const response = await fetch('/api/trips', {
-//         method: 'POST',
-//         body: JSON.stringify(tripObj),
-//         headers: {
-//             'Content-Type': 'application/json',
-//         }
-//     })
-
-//     const data = await response.json()
-
-//     console.log(data)
-// }
-
-// const newTrip = {
+// const newRecipe = {
 //     name: 'pretty cool mountain adventure',
 //     description: 'more than okay!!!'
 // }
 
-// postTrips(newTrip)
+// postRecipes(newRecipe)
 
 /**
  * Uncomment the below code to GET data from the database
  */
 
 
-// const getTrips = async() => {
-//     const response = await fetch('/api/trips')
-//     const data = await response.json()
-//     console.log(data)
-// }
+const getFavoriteRecipes = async() => {
+    const response = await fetch('/api/recipe')
+    const data = await response.json()
+    console.log(data)
+}
 
-// getTrips()
+getFavoriteRecipes()
 
 
 /**

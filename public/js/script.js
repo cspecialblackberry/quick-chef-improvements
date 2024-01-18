@@ -5,7 +5,8 @@ const intolerancesCheckBox = document.querySelector('#intolerances')
 const recipesContainer = document.querySelector('#recipes-container');
 const myFavorites = document.querySelector('#favorites');
 
-let recipeID = 715415
+// let recipeID = 715415
+let recipeID;
 
 let userSelections = {
     query: [],
@@ -64,14 +65,10 @@ const createQueryFilters = (selection) => {
     joinFilters(queryFilters)
 }
 
-
-
-
 const saveClickedID = (event) => {
     recipeID = event.target.id
     getSpecificRecipe()
 }
-
 
 const getSpecificRecipe = async () => {
     const response = await fetch(`https://api.spoonacular.com/recipes/${recipeID}/information?apiKey=36808371f778457eb823b528e2d0a3a6`)
@@ -81,11 +78,9 @@ const getSpecificRecipe = async () => {
     displaySpecificRecipe(data)
 }
 
-
 const clearResultArea = () => {
     recipesContainer.textContent = '';
 }
-
 
 const displayRecipes = (data) => {
     const recipeInfoEl = document.createElement('article');
@@ -207,6 +202,7 @@ const displayFavorites = (favRecipesData) => {
 
     favRecipeName.textContent = favRecipesData.name;
     favRecipeName.setAttribute('class', 'recipe-name');
+    favRecipeImage.src = favRecipesData.image;
     // favRecipeName.addEventListener('click', saveClickedID);
 
     recipesContainer.appendChild(favRecipeEl);

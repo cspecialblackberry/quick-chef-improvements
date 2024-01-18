@@ -196,21 +196,24 @@ const getFavoriteRecipes = async () => {
     console.log(favRecipesData)
 
     for(let i = 0; i < favRecipesData.length; i++) {
-        displayFavorites(favRecipesData[i]);
+        displayFavRecipe(favRecipesData[i]);
     }
 }
 
-const displayFavorites = (favRecipesData) => {
+const displayFavRecipe = (recipeData) => {
     const favRecipeEl = document.createElement('article');
     const favRecipeName = document.createElement('h2');
     const favRecipeImage = document.createElement('img');
     const favRecipeComments = document.createElement('p');
 
-    favRecipeName.textContent = favRecipesData.name;
+    favRecipeName.innerHTML = `<button data-recipe-id="${recipeData.recipeId}>${recipeData.name}</button>`;
     favRecipeName.setAttribute('class', 'recipe-name');
-    favRecipeImage.src = favRecipesData.image;
-    favRecipeComments.textContent = favRecipesData.comments;
-    // favRecipeName.addEventListener('click', saveClickedID);
+    favRecipeImage.src = recipeData.image;
+    favRecipeComments.textContent = recipeData.comments;
+    favRecipeName.querySelector('button').addEventListener('click', function(event) {
+        recipeID = event.target.getAttribute('data-recipe-id');
+        getSpecificRecipe()
+    });
 
     recipesContainer.appendChild(favRecipeEl);
     favRecipeEl.appendChild(favRecipeName);

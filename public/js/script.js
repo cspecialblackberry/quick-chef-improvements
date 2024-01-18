@@ -95,7 +95,7 @@ const displayRecipes = (data) => {
     recipeName.addEventListener('click', saveClickedID)
     const recipeImage = document.createElement('img');
 
-    recipeName.textContent = data.title;
+    recipeName.innerHTML = `<button>${data.title}</button>`;
     recipeImage.src = data.image;
 
     recipesContainer.appendChild(recipeInfoEl);

@@ -12,8 +12,8 @@ if (process.env.JAWSDB_URL) {
     process.env.DB_PASSWORD,
     {
       host: 'localhost',
-      dialect: 'postgres',
-      port: 5432
+      dialect: 'mariadb',
+      port: 3306
     }
   );
 }

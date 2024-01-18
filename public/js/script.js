@@ -186,6 +186,7 @@ const postRecipes = async(recipeObj) => {
 }
 
 const getFavoriteRecipes = async () => {
+    clearResultArea();
     const response = await fetch('/api/recipe');
     const favRecipesData = await response.json();
     console.log(favRecipesData)
@@ -199,15 +200,18 @@ const displayFavorites = (favRecipesData) => {
     const favRecipeEl = document.createElement('article');
     const favRecipeName = document.createElement('h2');
     const favRecipeImage = document.createElement('img');
+    const favRecipeComments = document.createElement('p');
 
     favRecipeName.textContent = favRecipesData.name;
     favRecipeName.setAttribute('class', 'recipe-name');
     favRecipeImage.src = favRecipesData.image;
+    favRecipeComments.textContent = favRecipesData.comments;
     // favRecipeName.addEventListener('click', saveClickedID);
 
     recipesContainer.appendChild(favRecipeEl);
     favRecipeEl.appendChild(favRecipeName);
     favRecipeEl.appendChild(favRecipeImage);
+    favRecipeEl.appendChild(favRecipeComments);
 }
 
 myFavorites.addEventListener('click', getFavoriteRecipes);

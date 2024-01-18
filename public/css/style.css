@@ -115,13 +115,15 @@ main {
 }
 
 article {
-    max-width: 500px;
+    max-width: 350px;
 }
 
 article img {
     display: block;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 15px;
+    width: 350px;
 }
 
 article button {

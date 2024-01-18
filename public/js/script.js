@@ -41,7 +41,7 @@ const getRecipes = async () => {
 
 const joinFilters = (queryFilters) => {
     let newQueryFilters = queryFilters.slice(0, -1)
-    baseURL = `https://api.spoonacular.com/recipes/complexSearch?apiKey=36808371f778457eb823b528e2d0a3a6`
+    baseURL = `https://api.spoonacular.com/recipes/complexSearch?apiKey=36808371f778457eb823b528e2d0a3a6&instructionsRequired=true`
     baseURL += newQueryFilters
     console.log(baseURL)
     getRecipes(baseURL)

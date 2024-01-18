@@ -206,8 +206,9 @@ const displayFavRecipe = (recipeData) => {
     const favRecipeImage = document.createElement('img');
     const favRecipeComments = document.createElement('p');
 
-    favRecipeName.innerHTML = `<button data-recipe-id="${recipeData.recipeId}>${recipeData.name}</button>`;
+    favRecipeName.innerHTML = `<button>${recipeData.name}</button>`;
     favRecipeName.setAttribute('class', 'recipe-name');
+    favRecipeName.querySelector('button').setAttribute('data-recipe-id', recipeData.recipeId);
     favRecipeImage.src = recipeData.image;
     favRecipeComments.textContent = recipeData.comments;
     favRecipeName.querySelector('button').addEventListener('click', function(event) {

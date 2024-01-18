@@ -4,6 +4,7 @@ const timeSlider = document.querySelector('#time-slider')
 const intolerancesCheckBox = document.querySelector('#intolerances')
 const recipesContainer = document.querySelector('#recipes-container');
 const myFavorites = document.querySelector('#favorites');
+const searchContainer = document.querySelector('#search-container');
 
 // let recipeID = 715415
 let recipeID;
@@ -80,6 +81,10 @@ const getSpecificRecipe = async () => {
 
 const clearResultArea = () => {
     recipesContainer.textContent = '';
+}
+
+const clearSearchArea = () => {
+    searchContainer.textContent = '';
 }
 
 const displayRecipes = (data) => {
@@ -185,6 +190,7 @@ const postRecipes = async(recipeObj) => {
 
 const getFavoriteRecipes = async () => {
     clearResultArea();
+    clearSearchArea();
     const response = await fetch('/api/recipe');
     const favRecipesData = await response.json();
     console.log(favRecipesData)

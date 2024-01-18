@@ -1,19 +1,22 @@
 const searchBtn = document.querySelector('#recipe-search');
 const ingredientsInput = document.querySelector('#ingredients')
 const timeSlider = document.querySelector('#time-slider')
+const intolerancesCheckBox = document.querySelector('#intolerances')
+console.log(intolerancesCheckBox)
 const recipesContainer = document.querySelector('#recipes-container');
 
 let recipeID = 715415
 
 let userSelections = {
-    includeIngredients: [],
+    query: [],
     intolerances: [],
     maxReadyTime: 0
 }
 
 const setUserSelections = (event) => {
-    userSelections.includeIngredients = ingredientsInput.value.split(' ')
+    userSelections.query = ingredientsInput.value.split(' ')
     userSelections.maxReadyTime = timeSlider.value
+    userSelections.intolerances = intolerancesCheckBox.value
     ingredientsInput.value = ''
     timeSlider.value = 30
 }
@@ -38,7 +41,7 @@ const getRecipes = async () => {
 
 const joinFilters = (queryFilters) => {
     let newQueryFilters = queryFilters.slice(0, -1)
-    baseURL = `https://api.spoonacular.com/recipes/complexSearch?apiKey=36808371f778457eb823b528e2d0a3a6&instructionsRequired=true&sort=random`
+    baseURL = `https://api.spoonacular.com/recipes/complexSearch?apiKey=36808371f778457eb823b528e2d0a3a6`
     baseURL += newQueryFilters
     console.log(baseURL)
     getRecipes(baseURL)
@@ -46,10 +49,10 @@ const joinFilters = (queryFilters) => {
 
 const createQueryFilters = (selection) => {
 
-    let queryFilters = `?`
+    let queryFilters = `&`
 
     for (key in selection) {
-        if (key === 'includeIngredients' && selection[key] != '') {
+        if (key === 'query' && selection[key] != '') {
             queryFilters += `${key}=${selection[key].join(',+')}&`
         } else if (key === 'intolerances' && selection[key] != '') {
             queryFilters += `${key}=${selection[key].join(',+')}&`
@@ -164,6 +167,17 @@ const displaySpecificRecipe = (data) => {
     recipeInfoEl.appendChild(instructionsTitle)
     recipeInfoEl.appendChild(instructions)
 } 
+
+const getRandom = async () => {
+    const response = await fetch('https://api.spoonacular.com/recipes/random?apiKey=36808371f778457eb823b528e2d0a3a6&number=10')
+    const data = await response.json()
+    console.log(data)
+}
+
+// getRandom()
+
+
+
 
 /**
  * Uncomment the below code to POST data to the database

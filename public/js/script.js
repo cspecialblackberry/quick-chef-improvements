@@ -128,6 +128,19 @@ const displaySpecificRecipe = (data) => {
     ingredientsTitle.textContent = "Ingredients:"
     instructionsTitle.textContent = "Instructions:"
 
+    const storeFavorite = () => {
+        let newFavorite = {
+            name: data.title,
+            image: data.image,
+            recipeId: data.id,
+            comments: 'this was great!'
+        }
+        console.log(newFavorite)
+        postRecipes(newFavorite);
+    }
+
+    favoriteButton.addEventListener('click', storeFavorite);
+
     const createDietList = (data) => {
         const diet = document.createElement('li')
         diet.textContent = data
@@ -165,31 +178,26 @@ const displaySpecificRecipe = (data) => {
     recipeInfoEl.appendChild(instructions)
 } 
 
-/**
- * Uncomment the below code to POST data to the database
- */
+const postRecipes = async(recipeObj) => {
+    const response = await fetch('/api/recipe', {
+        method: 'POST',
+        body: JSON.stringify(recipeObj),
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    })
 
+    const data = await response.json()
 
-// const postTrips = async(tripObj) => {
-//     const response = await fetch('/api/trips', {
-//         method: 'POST',
-//         body: JSON.stringify(tripObj),
-//         headers: {
-//             'Content-Type': 'application/json',
-//         }
-//     })
+    console.log(data)
+}
 
-//     const data = await response.json()
-
-//     console.log(data)
-// }
-
-// const newTrip = {
+// const newRecipe = {
 //     name: 'pretty cool mountain adventure',
 //     description: 'more than okay!!!'
 // }
 
-// postTrips(newTrip)
+// postRecipes(newRecipe)
 
 /**
  * Uncomment the below code to GET data from the database

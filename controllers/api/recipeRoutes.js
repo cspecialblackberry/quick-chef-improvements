@@ -26,13 +26,13 @@ router.post('/', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
   try {
-    const recipeData = await Trip.update(req.body, {
+    const recipeData = await Recipe.update(req.body, {
       where: {
         id: req.params.id,
       },
     });
     if (!recipeData[0]) {
-      res.status(404).json({ message: 'No trip with this id!' });
+      res.status(404).json({ message: 'No recipe with this id!' });
       return;
     }
     res.status(200).json(recipeData);
@@ -43,7 +43,7 @@ router.put('/:id', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
   try {
-    const recipeData = await Trip.destroy({
+    const recipeData = await Recipe.destroy({
       where: {
         id: req.params.id,
       },

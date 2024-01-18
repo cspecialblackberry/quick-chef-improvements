@@ -18,10 +18,13 @@ Recipe.init(
     image: {
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    comments: {
+      type: DataTypes.STRING,
+    },
+    recipeId: {
+      type: DataTypes.INTEGER,
     }
-    // description: {
-    //   type: DataTypes.STRING,
-    // },
     // date_created: {
     //   type: DataTypes.DATE,
     //   allowNull: false,

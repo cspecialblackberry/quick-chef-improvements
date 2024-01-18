@@ -207,13 +207,13 @@ const postRecipes = async(recipeObj) => {
  */
 
 
-// const getTrips = async() => {
-//     const response = await fetch('/api/trips')
-//     const data = await response.json()
-//     console.log(data)
-// }
+const getFavoriteRecipes = async() => {
+    const response = await fetch('/api/recipe')
+    const data = await response.json()
+    console.log(data)
+}
 
-// getTrips()
+getFavoriteRecipes()
 
 
 /**

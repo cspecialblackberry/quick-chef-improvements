@@ -130,4 +130,4 @@ dist
 .pnp.*
 
 # connection.js
-./config/connection.js
+.config/connection.js

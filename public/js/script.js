@@ -2,10 +2,12 @@ const searchBtn = document.querySelector('#recipe-search');
 const ingredientsInput = document.querySelector('#ingredients')
 const timeSlider = document.querySelector('#time-slider')
 const intolerancesCheckBox = document.querySelector('#intolerances')
-console.log(intolerancesCheckBox)
 const recipesContainer = document.querySelector('#recipes-container');
+const myFavorites = document.querySelector('#favorites');
+const searchContainer = document.querySelector('#search-container');
 
-let recipeID = 715415
+// let recipeID = 715415
+let recipeID;
 
 let userSelections = {
     query: [],
@@ -64,14 +66,10 @@ const createQueryFilters = (selection) => {
     joinFilters(queryFilters)
 }
 
-
-
-
 const saveClickedID = (event) => {
     recipeID = event.target.id
     getSpecificRecipe()
 }
-
 
 const getSpecificRecipe = async () => {
     const response = await fetch(`https://api.spoonacular.com/recipes/${recipeID}/information?apiKey=36808371f778457eb823b528e2d0a3a6`)
@@ -81,31 +79,27 @@ const getSpecificRecipe = async () => {
     displaySpecificRecipe(data)
 }
 
-
 const clearResultArea = () => {
     recipesContainer.textContent = '';
 }
 
+const clearSearchArea = () => {
+    searchContainer.textContent = '';
+}
 
 const displayRecipes = (data) => {
-    
     const recipeInfoEl = document.createElement('article');
     const recipeName = document.createElement('h2');
     recipeName.setAttribute('id', data.id)
     recipeName.setAttribute('class', 'recipe-name')
     recipeName.addEventListener('click', saveClickedID)
-    console.log(recipeName)
-    // const maxReadyTime = document.createElement('p');
     const recipeImage = document.createElement('img');
 
     recipeName.textContent = data.title;
-    // maxReadyTime.textContent = data.readInMinutes;
     recipeImage.src = data.image;
-    // need to adjust these ^^ so they're getting the info
 
     recipesContainer.appendChild(recipeInfoEl);
     recipeInfoEl.appendChild(recipeName);
-    // recipeInfoEl.appendChild(maxReadyTime);
     recipeInfoEl.appendChild(recipeImage);
 }
 
@@ -138,7 +132,6 @@ const displaySpecificRecipe = (data) => {
             recipeId: data.id,
             comments: 'this was great!'
         }
-        console.log(newFavorite)
         postRecipes(newFavorite);
     }
 
@@ -195,6 +188,43 @@ const postRecipes = async(recipeObj) => {
     console.log(data)
 }
 
+const getFavoriteRecipes = async () => {
+    clearResultArea();
+    clearSearchArea();
+    const response = await fetch('/api/recipe');
+    const favRecipesData = await response.json();
+    console.log(favRecipesData)
+
+    for(let i = 0; i < favRecipesData.length; i++) {
+        displayFavRecipe(favRecipesData[i]);
+    }
+}
+
+const displayFavRecipe = (recipeData) => {
+    const favRecipeEl = document.createElement('article');
+    const favRecipeName = document.createElement('h2');
+    const favRecipeImage = document.createElement('img');
+    const favRecipeComments = document.createElement('p');
+
+    favRecipeName.innerHTML = `<button>${recipeData.name}</button>`;
+    favRecipeName.setAttribute('class', 'recipe-name');
+    favRecipeName.querySelector('button').setAttribute('data-recipe-id', recipeData.recipeId);
+    favRecipeImage.src = recipeData.image;
+    favRecipeComments.textContent = recipeData.comments;
+    favRecipeName.querySelector('button').addEventListener('click', function(event) {
+        recipeID = event.target.getAttribute('data-recipe-id');
+        getSpecificRecipe()
+    });
+
+    recipesContainer.appendChild(favRecipeEl);
+    favRecipeEl.appendChild(favRecipeName);
+    favRecipeEl.appendChild(favRecipeImage);
+    favRecipeEl.appendChild(favRecipeComments);
+}
+
+myFavorites.addEventListener('click', getFavoriteRecipes);
+
+
 // const newRecipe = {
 //     name: 'pretty cool mountain adventure',
 //     description: 'more than okay!!!'
@@ -202,18 +232,6 @@ const postRecipes = async(recipeObj) => {
 
 // postRecipes(newRecipe)
 
-/**
- * Uncomment the below code to GET data from the database
- */
-
-
-const getFavoriteRecipes = async() => {
-    const response = await fetch('/api/recipe')
-    const data = await response.json()
-    console.log(data)
-}
-
-getFavoriteRecipes()
 
 
 /**

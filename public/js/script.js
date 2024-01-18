@@ -88,7 +88,6 @@ const displayRecipes = (data) => {
     recipeName.setAttribute('id', data.id)
     recipeName.setAttribute('class', 'recipe-name')
     recipeName.addEventListener('click', saveClickedID)
-    console.log(recipeName)
     const recipeImage = document.createElement('img');
 
     recipeName.textContent = data.title;
@@ -128,7 +127,6 @@ const displaySpecificRecipe = (data) => {
             recipeId: data.id,
             comments: 'this was great!'
         }
-        console.log(newFavorite)
         postRecipes(newFavorite);
     }
 

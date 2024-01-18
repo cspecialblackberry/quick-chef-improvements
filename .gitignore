@@ -131,4 +131,4 @@ dist
 
 
 # connection.js
-./config/connection.js
+.config/connection.js

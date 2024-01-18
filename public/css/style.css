@@ -37,6 +37,7 @@ nav {
 
 nav a {
     text-transform: uppercase;
+    margin-right: 25px;
 }
 
 main {

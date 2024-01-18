@@ -18,7 +18,7 @@ let userSelections = {
 const setUserSelections = (event) => {
     userSelections.query = ingredientsInput.value.split(' ')
     userSelections.maxReadyTime = timeSlider.value
-    userSelections.intolerances = intolerancesCheckBox.value
+    userSelections.intolerances = intolerancesCheckBox.value.split(' ')
     ingredientsInput.value = ''
     timeSlider.value = 30
 }

@@ -115,13 +115,15 @@ main {
 }
 
 article {
-    max-width: 500px;
+    max-width: 350px;
 }
 
 article img {
     display: block;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 15px;
+    width: 350px;
 }
 
 article button {
@@ -138,12 +140,21 @@ h1 {
 }
 
 h2 {
-    font-family: 'DM Serif Display', Georgia, 'Times New Roman', Times, serif;
-    color: #dc2f02;
-    font-size: 2.1em;
+    color: #e85d04;
+    font-size: 1.7em;
     margin-bottom: 15px;
     margin-top: 15px;
     text-align: center;
+}
+
+h2 button {
+    color: #e85d04;
+    font-size: 20px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    text-align: center;
+    background: none;
+    border: none;
 }
 
 h3 {

@@ -181,7 +181,8 @@ h3 {
 
 .weekday-section {
     background-color: #e85d04;
-    height: 200px;
+    min-height: 200px;
+    height: auto;
     width: 100%;
     display: flex;
     border-width: 1.5px 3px;
@@ -227,8 +228,50 @@ h3 {
 
 .recipe-section {
     display: flex;
+    flex-flow: row wrap;
     width: 60%;
     border-right: 2px solid;
+    padding: 5px;
+}
+
+.recipe-section div {
+    display: flex;
+    width: 40%;
+    flex-direction: column;
+    align-items: center;
+}
+
+.recipe-section h2 {
+    color: #333;
+    font-size: 1.7em;
+    display: flex;
+    text-align: center;
+}
+
+
+.recipe-section img {
+    min-width: 200px;
+}
+
+.recipe-section section {
+    display: flex;
+    width: 60%;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.recipe-section section h3 {
+    text-align: center;
+}
+
+.recipe-section section ul {
+    display: flex;
+    flex-flow: row wrap;
+    text-align: center;
+}
+
+.recipe-section section ul li {
+    margin: 10px;
 }
 
 .clear-section {

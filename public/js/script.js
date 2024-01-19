@@ -18,7 +18,7 @@ let userSelections = {
 const setUserSelections = (event) => {
     userSelections.query = ingredientsInput.value.split(' ')
     userSelections.maxReadyTime = timeSlider.value
-    userSelections.intolerances = intolerancesCheckBox.value
+    userSelections.intolerances = intolerancesCheckBox.value.split(' ')
     ingredientsInput.value = ''
     timeSlider.value = 30
 }
@@ -43,7 +43,7 @@ const getRecipes = async () => {
 
 const joinFilters = (queryFilters) => {
     let newQueryFilters = queryFilters.slice(0, -1)
-    baseURL = `https://api.spoonacular.com/recipes/complexSearch?apiKey=36808371f778457eb823b528e2d0a3a6`
+    baseURL = `https://api.spoonacular.com/recipes/complexSearch?apiKey=36808371f778457eb823b528e2d0a3a6&instructionsRequired=true`
     baseURL += newQueryFilters
     console.log(baseURL)
     getRecipes(baseURL)

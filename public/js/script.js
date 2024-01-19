@@ -228,22 +228,24 @@ const displayFavRecipe = (recipeData) => {
     favRecipeEl.appendChild(favRecipeImage);
     favRecipeEl.appendChild(commentsLabel);
     favRecipeEl.appendChild(favRecipeComments);
+
+    const newComment = {
+        comment: favRecipeComments.value
+    }
+
+    const updateComments = (event) => {
+        if (event.key === 'Enter') {
+            updateRecipe('id', newComment);
+        }
+    }
+
+    favRecipeComments.addEventListener('keyup', updateComments);
 }
 
 myFavorites.addEventListener('click', getFavoriteRecipes);
 
-const newComment = {
-    comment: favRecipeComments.value
-}
-
-const updateComments = () => {
-    //check if enter was keyed
-
-    
-}
 
 
-favRecipeComments.addEventListener('keyup', updateComments);
 
 
 
@@ -296,8 +298,6 @@ const updateRecipe = async(id, newRecipeObj) => {
     const data = await response.json()
     console.log(data)
 }
-
-updateRecipe(id, newComment)
 
 
 

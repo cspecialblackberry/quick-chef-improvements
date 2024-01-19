@@ -14,7 +14,8 @@ body {
 p,
 ul,
 li,
-ol {
+ol,
+label {
     font-size: .9em;
     margin-bottom: 10px;
 }
@@ -50,7 +51,15 @@ main {
     flex-direction: column;
     align-items: center;
     flex-wrap: wrap;
-    gap: 30px;
+    gap: 40px;
+}
+
+#ingredients-container,
+#time-container,
+#multiselect {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 #ingredients {
@@ -168,6 +177,13 @@ h3 {
 .recipe-name:hover {
     cursor: pointer;
 }
+
+
+    @media screen and (min-width: 480px) {
+        #search-container {
+            flex-direction: row;
+        }
+    }
 
 /*meal planner*/
 

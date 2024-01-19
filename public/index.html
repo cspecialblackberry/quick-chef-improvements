@@ -22,9 +22,14 @@
     </header>
     <main>
         <section id="search-container">
-            <input type="text" id="ingredients" placeholder="Search by ingredient">
-            <label for="time-slider">Time</label>
-            <input type="range" min="10" max="45" id="time-slider">
+            <div id="ingredients-container">
+                <label for="ingredients">What ingredient do you want to use?</label>
+                <input type="text" id="ingredients" placeholder="Search by ingredient">
+            </div>
+            <div id="time-container">
+                <label for="time-slider">How much time do you have?</label>
+                <input type="range" min="10" max="45" id="time-slider">
+            </div>
             <div id="multiselect">
                 <label for="intolerances">Any allergies or intolerances?</label>
                 <select name="intolerances" id="intolerances" multiple>

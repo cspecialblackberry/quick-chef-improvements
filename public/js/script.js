@@ -67,11 +67,12 @@ const createQueryFilters = (selection) => {
 }
 
 const saveClickedID = (event) => {
-    recipeID = event.target.id
-    getSpecificRecipe()
+    recipeID = event.target.parentElement.id
+    getSpecificRecipe(recipeID)
+
 }
 
-const getSpecificRecipe = async () => {
+const getSpecificRecipe = async (recipeID) => {
     const response = await fetch(`https://api.spoonacular.com/recipes/${recipeID}/information?apiKey=36808371f778457eb823b528e2d0a3a6`)
     const data = await response.json()
     console.log(data)
@@ -90,12 +91,12 @@ const clearSearchArea = () => {
 const displayRecipes = (data) => {
     const recipeInfoEl = document.createElement('article');
     const recipeName = document.createElement('h2');
+    recipeName.innerHTML = `<button>${data.title}</button>`;
     recipeName.setAttribute('id', data.id)
     recipeName.setAttribute('class', 'recipe-name')
     recipeName.addEventListener('click', saveClickedID)
     const recipeImage = document.createElement('img');
 
-    recipeName.textContent = data.title;
     recipeImage.src = data.image;
 
     recipesContainer.appendChild(recipeInfoEl);
@@ -213,7 +214,7 @@ const displayFavRecipe = (recipeData) => {
     favRecipeComments.textContent = recipeData.comments;
     favRecipeName.querySelector('button').addEventListener('click', function(event) {
         recipeID = event.target.getAttribute('data-recipe-id');
-        getSpecificRecipe()
+        getSpecificRecipe(recipeID)
     });
 
     recipesContainer.appendChild(favRecipeEl);

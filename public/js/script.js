@@ -214,13 +214,12 @@ const displayFavRecipe = (recipeData) => {
     favRecipeName.innerHTML = `<button>${recipeData.name}</button>`;
     favRecipeName.setAttribute('class', 'recipe-name');
     favRecipeName.querySelector('button').setAttribute('data-recipe-id', recipeData.recipeId);
-    favRecipeImage.src = recipeData.image;
-    favRecipeComments.textContent = recipeData.comments;
     favRecipeName.querySelector('button').addEventListener('click', function(event) {
         recipeID = event.target.getAttribute('data-recipe-id');
         getSpecificRecipe(recipeID);
     });
-
+    favRecipeImage.src = recipeData.image;
+    // favRecipeComments.textContent = recipeData.comments;
     favRecipeComments.setAttribute('class', 'fav-comments');
     favRecipeComments.setAttribute('placeholder', 'Jot down your notes!');
     commentsLabel.setAttribute('for', 'fav-comments');
@@ -237,7 +236,7 @@ const displayFavRecipe = (recipeData) => {
             updateRecipe(recipeData.id, newComment);
         }
     }
-    console.log(recipeData.id)
+    console.log(newComment)
 
     favRecipeComments.addEventListener('keyup', updateComments);
 }
@@ -254,7 +253,7 @@ const updateRecipe = async(id, newRecipeObj) => {
      })
      const data = await response.json()
      console.log(data)
- }
+}
 
 
 

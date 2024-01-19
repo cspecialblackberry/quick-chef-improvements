@@ -245,7 +245,7 @@ const displayFavRecipe = (recipeData) => {
 myFavorites.addEventListener('click', getFavoriteRecipes);
 
 const updateRecipe = async(id, newRecipeObj) => {
-    const response = await fetch(`/api/recipe/${recipeData.id}`, {
+    const response = await fetch(`/api/recipe/${id}`, {
          method: 'PUT',
          body: JSON.stringify(newRecipeObj),
          headers: {

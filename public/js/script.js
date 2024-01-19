@@ -207,6 +207,9 @@ const displayFavRecipe = (recipeData) => {
     const favRecipeImage = document.createElement('img');
     const favRecipeComments = document.createElement('input');
     const commentsLabel = document.createElement('label');
+    const newComment = {
+        comment: favRecipeComments.value
+    }
 
     favRecipeName.innerHTML = `<button>${recipeData.name}</button>`;
     favRecipeName.setAttribute('class', 'recipe-name');
@@ -229,22 +232,29 @@ const displayFavRecipe = (recipeData) => {
     favRecipeEl.appendChild(commentsLabel);
     favRecipeEl.appendChild(favRecipeComments);
 
-    const newComment = {
-        comment: favRecipeComments.value
-    }
-
     const updateComments = (event) => {
         if (event.key === 'Enter') {
-            updateRecipe('id', newComment);
+            updateRecipe(recipeData.id, newComment);
         }
     }
+    console.log(recipeData.id)
 
     favRecipeComments.addEventListener('keyup', updateComments);
 }
 
 myFavorites.addEventListener('click', getFavoriteRecipes);
 
-
+const updateRecipe = async(id, newRecipeObj) => {
+    const response = await fetch(`/api/recipe/${recipeData.id}`, {
+         method: 'PUT',
+         body: JSON.stringify(newRecipeObj),
+         headers: {
+             'Content-Type': 'application/json',
+         }
+     })
+     const data = await response.json()
+     console.log(data)
+ }
 
 
 
@@ -285,20 +295,3 @@ myFavorites.addEventListener('click', getFavoriteRecipes);
 //     name: 'pretty cool mountain adventure',
 //     description: 'WAY WAY more than okay!!!'
 // }
-
-
-const updateRecipe = async(id, newRecipeObj) => {
-   const response = await fetch(`/api/recipe/${id}`, {
-        method: 'PUT',
-        body: JSON.stringify(newRecipeObj),
-        headers: {
-            'Content-Type': 'application/json',
-        }
-    })
-    const data = await response.json()
-    console.log(data)
-}
-
-
-
-

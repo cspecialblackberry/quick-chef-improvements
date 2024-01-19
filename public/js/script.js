@@ -131,7 +131,7 @@ const displaySpecificRecipe = (data) => {
             name: data.title,
             image: data.image,
             recipeId: data.id,
-            comments: 'this was great!'
+            comments: ''
         }
         postRecipes(newFavorite);
     }
@@ -205,7 +205,8 @@ const displayFavRecipe = (recipeData) => {
     const favRecipeEl = document.createElement('article');
     const favRecipeName = document.createElement('h2');
     const favRecipeImage = document.createElement('img');
-    const favRecipeComments = document.createElement('p');
+    const favRecipeComments = document.createElement('input');
+    const commentsLabel = document.createElement('label');
 
     favRecipeName.innerHTML = `<button>${recipeData.name}</button>`;
     favRecipeName.setAttribute('class', 'recipe-name');
@@ -214,16 +215,36 @@ const displayFavRecipe = (recipeData) => {
     favRecipeComments.textContent = recipeData.comments;
     favRecipeName.querySelector('button').addEventListener('click', function(event) {
         recipeID = event.target.getAttribute('data-recipe-id');
-        getSpecificRecipe(recipeID)
+        getSpecificRecipe(recipeID);
     });
+
+    favRecipeComments.setAttribute('class', 'fav-comments');
+    favRecipeComments.setAttribute('placeholder', 'Jot down your notes!');
+    commentsLabel.setAttribute('for', 'fav-comments');
+    commentsLabel.textContent = 'Share your thoughts or changes to the recipe:';
 
     recipesContainer.appendChild(favRecipeEl);
     favRecipeEl.appendChild(favRecipeName);
     favRecipeEl.appendChild(favRecipeImage);
+    favRecipeEl.appendChild(commentsLabel);
     favRecipeEl.appendChild(favRecipeComments);
 }
 
 myFavorites.addEventListener('click', getFavoriteRecipes);
+
+const newComment = {
+    comment: favRecipeComments.value
+}
+
+const updateComments = () => {
+    //check if enter was keyed
+
+    
+}
+
+
+favRecipeComments.addEventListener('keyup', updateComments);
+
 
 
 // const newRecipe = {
@@ -264,19 +285,19 @@ myFavorites.addEventListener('click', getFavoriteRecipes);
 // }
 
 
-// const updateTrip = async(id, newTripObj) => {
-//    const response = await fetch(`/api/trips/{id}`, {
-//         method: 'PUT',
-//         body: JSON.stringify(newTripObj),
-//         headers: {
-//             'Content-Type': 'application/json',
-//         }
-//     })
-//     const data = await response.json()
-//     console.log(data)
-// }
+const updateRecipe = async(id, newRecipeObj) => {
+   const response = await fetch(`/api/recipe/${id}`, {
+        method: 'PUT',
+        body: JSON.stringify(newRecipeObj),
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    })
+    const data = await response.json()
+    console.log(data)
+}
 
-// updateTrip(1, newTrip)
+updateRecipe(id, newComment)
 
 
 

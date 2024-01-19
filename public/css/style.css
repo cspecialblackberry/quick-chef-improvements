@@ -169,6 +169,8 @@ h3 {
     cursor: pointer;
 }
 
+/*meal planner*/
+
 .weekday-div {
     margin-top: 20px;
     display: flex; 
@@ -190,6 +192,8 @@ h3 {
     display: flex;
     width: 25%;
     border-right: 2px solid;
+    flex-direction: column;
+    justify-content: space-around;
 }
 
 .input-section h2 {
@@ -197,6 +201,11 @@ h3 {
     font-size: 1.7em;
     margin-bottom: 15px;
     margin-top: 15px;
+    justify-self: center;
+    width: 100%;
+}
+
+.input-section p {
     text-align: center;
 }
 
@@ -204,6 +213,15 @@ h3 {
     width: 250px;
     height: 55px;
     border-radius: 5px;
+    border: 1px solid #333;  
+    align-self: center;
+    background-color: #f7feff;
+}
+
+.input-section button {
+    width: 150px;
+    align-self:center;
+    background-color: #f7feff;
     border: 1px solid #333;  
 }
 

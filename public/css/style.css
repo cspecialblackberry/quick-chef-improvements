@@ -291,6 +291,7 @@ h3 {
     display: flex;
     flex-flow: row wrap;
     text-align: center;
+    list-style-type: circle;
 }
 
 .recipe-section section ul li {
@@ -299,5 +300,13 @@ h3 {
 
 .clear-section {
     display: flex;
-    width: 15%
+    width: 15%;
+}
+
+.clear-section button {
+    width: 150px;
+    align-self:center;
+    background-color: #f7feff;
+    border: 1px solid #333; 
+    
 }

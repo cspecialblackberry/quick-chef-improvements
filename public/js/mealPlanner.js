@@ -52,10 +52,19 @@ const createSelectOptions = async (select) => {
 selectArray.forEach(createSelectOptions)
 
 let clickedButton
+
 let selectedRecipeName
 let selectedRecipeId
+
 let matchingRecipeArea
 let matchingSelect
+
+let storedRecipes = []
+let storedRecipeAreas = []
+let storedRecipeDatas = []
+console.log(storedRecipes)
+console.log(storedRecipeAreas)
+console.log(storedRecipeDatas)
 
 const findMatchingSelect = (select) => {
     if (select.id.includes(clickedButton[0])) {
@@ -109,8 +118,6 @@ const clearRecipeArea = () => {
 }
 
 const displaySelectedRecipe = (data) => {
-    console.log(matchingRecipeArea)
-
     clearRecipeArea()
 
     const titleDiv = document.createElement('div')
@@ -142,18 +149,47 @@ const displaySelectedRecipe = (data) => {
     matchingRecipeArea.appendChild(ingredientsDiv)
 }
 
-const lookForStoredRecipes = async (day) => {
+// const lookForStoredRecipes = async (day) => {
+//     if (localStorage.getItem(day.id)) {
+//         console.log(day)
+//         matchingRecipeArea = day
+//         const response = await fetch(`https://api.spoonacular.com/recipes/${localStorage.getItem(day.id)}/information?apiKey=36808371f778457eb823b528e2d0a3a6`)
+//         const data = await response.json()
+//         console.log(data)
+//         displaySelectedRecipe(data)
+//     }
+// }
+
+const lookForStoredRecipes = (day) => {
     if (localStorage.getItem(day.id)) {
-        console.log(day)
-        matchingRecipeArea = day
-        const response = await fetch(`https://api.spoonacular.com/recipes/${localStorage.getItem(day.id)}/information?apiKey=36808371f778457eb823b528e2d0a3a6`)
-        const data = await response.json()
-        console.log(data)
-        displaySelectedRecipe(data)
+        storedRecipeAreas.push(day)
+        storedRecipes.push(localStorage.getItem(day.id))
     }
 }
 
+// const searchStoredRecipes = async (id) => {
+//     console.log(id)
+//     const response = await fetch(`https://api.spoonacular.com/recipes/${id}/information?apiKey=36808371f778457eb823b528e2d0a3a6`)
+//     const data = await response.json()
+//     storedRecipeDatas.push(data)
+//     console.log('hi')
+// }
+
 recipeAreaArray.forEach(lookForStoredRecipes)
+// storedRecipes.map(searchStoredRecipes)
+async function searchStoredRecipes() {
+    await Promise.all(storedRecipes.map(async (recipe) => {
+        console.log(recipe)
+        const response = await fetch(`https://api.spoonacular.com/recipes/${recipe}/information?apiKey=36808371f778457eb823b528e2d0a3a6`)
+        const data = await response.json()
+        storedRecipeDatas.push(data)
+        console.log('hi')
+    }))
+}
+searchStoredRecipes()
+console.log(storedRecipeAreas)
+console.log(storedRecipes)
+console.log(storedRecipeDatas)
 
 sundayButton.addEventListener('click', matchSelectedFields)
 mondayButton.addEventListener('click', matchSelectedFields)

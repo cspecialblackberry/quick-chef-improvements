@@ -187,7 +187,7 @@ const deleteStoredRecipe = (event) => {
     localStorage.removeItem(day[0])
 
     function findRecipeArea(recipeArea) {
-        if (recipeArea.id === clickedButton[0]) {
+        if (recipeArea.id === day[0]) {
             return recipeArea
         }
     }

@@ -5,18 +5,20 @@ const intolerancesCheckBox = document.querySelector('#intolerances')
 const recipesContainer = document.querySelector('#recipes-container');
 const myFavorites = document.querySelector('#favorites');
 const searchContainer = document.querySelector('#search-container');
+const pageButtonContainer = document.querySelector('#page-button-container')
 
 // let recipeID = 715415
 let recipeID;
+let pageIndex = 0
 
 let userSelections = {
-    query: [],
+    includeIngredients: [],
     intolerances: [],
     maxReadyTime: 0
 }
 
 const setUserSelections = (event) => {
-    userSelections.query = ingredientsInput.value.split(' ')
+    userSelections.includeIngredients = ingredientsInput.value.split(' ')
     userSelections.maxReadyTime = timeSlider.value
     userSelections.intolerances = intolerancesCheckBox.value.split(' ')
     ingredientsInput.value = ''
@@ -31,21 +33,20 @@ const findRecipes = () => {
 
 searchBtn.addEventListener('click', findRecipes);
 
-let baseURL 
+let baseURL
 
 const getRecipes = async () => {
     const response = await fetch(baseURL)
     const data = await response.json()
-    console.log(data)
     clearResultArea()
+    createPageButtons()
     data.results.forEach(displayRecipes)
 }
 
 const joinFilters = (queryFilters) => {
     let newQueryFilters = queryFilters.slice(0, -1)
-    baseURL = `https://api.spoonacular.com/recipes/complexSearch?apiKey=36808371f778457eb823b528e2d0a3a6&instructionsRequired=true`
+    baseURL = `https://api.spoonacular.com/recipes/complexSearch?apiKey=36808371f778457eb823b528e2d0a3a6&instructionsRequired=true&offset=${pageIndex}`
     baseURL += newQueryFilters
-    console.log(baseURL)
     getRecipes(baseURL)
 }
 
@@ -77,6 +78,7 @@ const getSpecificRecipe = async (recipeID) => {
     const data = await response.json()
     console.log(data)
     clearResultArea()
+    clearPageButtonArea()
     displaySpecificRecipe(data)
 }
 
@@ -86,6 +88,36 @@ const clearResultArea = () => {
 
 const clearSearchArea = () => {
     searchContainer.textContent = '';
+}
+
+const clearPageButtonArea = () => {
+    pageButtonContainer.textContent = ''
+}
+
+const runNextPage = () => {
+    pageIndex+=10
+    createQueryFilters()
+    clearPageButtonArea()
+}
+
+const runPreviousPage = () => {
+    pageIndex-=10
+    createQueryFilters()
+    clearPageButtonArea()
+}
+
+const createPageButtons = () => {
+    const nextButton = document.createElement('button')
+    nextButton.textContent = 'next'
+    nextButton.addEventListener('click', runNextPage)
+    pageButtonContainer.appendChild(nextButton)
+
+    if (pageIndex > 0) {
+        const prevButton = document.createElement('button')
+        prevButton.textContent = 'previous'
+        prevButton.addEventListener('click', runPreviousPage)
+        pageButtonContainer.appendChild(prevButton)
+    }
 }
 
 const displayRecipes = (data) => {
@@ -105,7 +137,12 @@ const displayRecipes = (data) => {
 }
 
 const displaySpecificRecipe = (data) => {
-    
+    const backButton = document.createElement('button')
+    backButton.textContent = 'back'
+    backButton.addEventListener('click', getRecipes)
+    backButton.addEventListener('click', clearPageButtonArea)
+    pageButtonContainer.appendChild(backButton)
+
     const recipeInfoEl = document.createElement('article')
     const recipeName = document.createElement('h2')
     const favoriteButton = document.createElement('button')
@@ -173,9 +210,9 @@ const displaySpecificRecipe = (data) => {
     recipeInfoEl.appendChild(ingredients)
     recipeInfoEl.appendChild(instructionsTitle)
     recipeInfoEl.appendChild(instructions)
-} 
+}
 
-const postRecipes = async(recipeObj) => {
+const postRecipes = async (recipeObj) => {
     const response = await fetch('/api/recipe', {
         method: 'POST',
         body: JSON.stringify(recipeObj),
@@ -196,7 +233,7 @@ const getFavoriteRecipes = async () => {
     const favRecipesData = await response.json();
     console.log(favRecipesData)
 
-    for(let i = 0; i < favRecipesData.length; i++) {
+    for (let i = 0; i < favRecipesData.length; i++) {
         displayFavRecipe(favRecipesData[i]);
     }
 }
@@ -214,7 +251,7 @@ const displayFavRecipe = (recipeData) => {
     favRecipeName.innerHTML = `<button>${recipeData.name}</button>`;
     favRecipeName.setAttribute('class', 'recipe-name');
     favRecipeName.querySelector('button').setAttribute('data-recipe-id', recipeData.recipeId);
-    favRecipeName.querySelector('button').addEventListener('click', function(event) {
+    favRecipeName.querySelector('button').addEventListener('click', function (event) {
         recipeID = event.target.getAttribute('data-recipe-id');
         getSpecificRecipe(recipeID);
     });
@@ -243,16 +280,16 @@ const displayFavRecipe = (recipeData) => {
 
 myFavorites.addEventListener('click', getFavoriteRecipes);
 
-const updateRecipe = async(id, newRecipeObj) => {
+const updateRecipe = async (id, newRecipeObj) => {
     const response = await fetch(`/api/recipe/${id}`, {
-         method: 'PUT',
-         body: JSON.stringify(newRecipeObj),
-         headers: {
-             'Content-Type': 'application/json',
-         }
-     })
-     const data = await response.json()
-     console.log(data)
+        method: 'PUT',
+        body: JSON.stringify(newRecipeObj),
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    })
+    const data = await response.json()
+    console.log(data)
 }
 
 

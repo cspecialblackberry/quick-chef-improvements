@@ -33,7 +33,7 @@ const saturdayDelete = document.querySelector('#saturday-delete')
 let recipeAreaArray = [sunday, monday, tuesday, wednesday, thursday, friday, saturday]
 let selectArray = [sundaySelect, mondaySelect, tuesdaySelect, wednesdaySelect, thursdaySelect, fridaySelect, saturdaySelect]
 
-let favorites
+
 
 let clickedButton
 
@@ -193,7 +193,7 @@ const deleteStoredRecipe = (event) => {
     }
 
     matchingRecipeArea = recipeAreaArray.find(findRecipeArea)
-    clearRecipeArea(matchingRecipeArea)
+    clearRecipeArea()
 }
 
 recipeAreaArray.forEach(lookForStoredRecipes)

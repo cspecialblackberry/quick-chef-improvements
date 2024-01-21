@@ -1,11 +1,18 @@
 const searchBtn = document.querySelector('#recipe-search');
 const ingredientsInput = document.querySelector('#ingredients')
 const timeSlider = document.querySelector('#time-slider')
+const timeSliderLabel = document.querySelector('#time-slider-label')
 const intolerancesCheckBox = document.querySelector('#intolerances')
 const recipesContainer = document.querySelector('#recipes-container');
 const myFavorites = document.querySelector('#favorites');
 const searchContainer = document.querySelector('#search-container');
 const pageButtonContainer = document.querySelector('#page-button-container')
+
+const updateTime = () => {
+    timeSliderLabel.textContent = timeSlider.value
+}
+
+timeSlider.addEventListener('input', updateTime)
 
 // let recipeID = 715415
 let recipeID;

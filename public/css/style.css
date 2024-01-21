@@ -94,6 +94,10 @@ main {
     opacity: 1;
 }
 
+#time-slider-label {
+    margin-top: 3px;
+}
+
 #intolerances {
     width: 250px;
     height: 55px;

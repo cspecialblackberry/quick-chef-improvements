@@ -249,11 +249,12 @@ const displayFavRecipe = (recipeData) => {
     const favRecipeEl = document.createElement('article');
     const favRecipeName = document.createElement('h2');
     const favRecipeImage = document.createElement('img');
-    const favRecipeComments = document.createElement('input');
+    const commentInput = document.createElement('input');
     const commentsLabel = document.createElement('label');
-    const newComment = {
-        comment: favRecipeComments.value
-    }
+    const savedComment = document.createElement('p');
+    let newComment = {
+        comments: commentInput.value
+    };
 
     favRecipeName.innerHTML = `<button>${recipeData.name}</button>`;
     favRecipeName.setAttribute('class', 'recipe-name');
@@ -263,26 +264,26 @@ const displayFavRecipe = (recipeData) => {
         getSpecificRecipe(recipeID);
     });
     favRecipeImage.src = recipeData.image;
-    // favRecipeComments.textContent = recipeData.comments;
-    favRecipeComments.setAttribute('class', 'fav-comments');
-    favRecipeComments.setAttribute('placeholder', 'Jot down your notes!');
+    commentInput.setAttribute('class', 'fav-comments');
+    commentInput.setAttribute('placeholder', 'Jot down your notes!');
     commentsLabel.setAttribute('for', 'fav-comments');
     commentsLabel.textContent = 'Share your thoughts or changes to the recipe:';
+    savedComment.textContent = newComment.comments;
 
     recipesContainer.appendChild(favRecipeEl);
     favRecipeEl.appendChild(favRecipeName);
     favRecipeEl.appendChild(favRecipeImage);
     favRecipeEl.appendChild(commentsLabel);
-    favRecipeEl.appendChild(favRecipeComments);
+    favRecipeEl.appendChild(commentInput);
+    favRecipeEl.appendChild(savedComment);
 
     const updateComments = (event) => {
         if (event.key === 'Enter') {
             updateRecipe(recipeData.id, newComment);
         }
     }
-    console.log(newComment)
 
-    favRecipeComments.addEventListener('keyup', updateComments);
+    commentInput.addEventListener('keyup', updateComments);
 }
 
 myFavorites.addEventListener('click', getFavoriteRecipes);
@@ -298,6 +299,7 @@ const updateRecipe = async (id, newRecipeObj) => {
     const data = await response.json()
     console.log(data)
 }
+
 
 
 

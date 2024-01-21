@@ -30,6 +30,7 @@ const thursdayDelete = document.querySelector('#thursday-delete')
 const fridayDelete = document.querySelector('#friday-delete')
 const saturdayDelete = document.querySelector('#saturday-delete')
 
+
 let recipeAreaArray = [sunday, monday, tuesday, wednesday, thursday, friday, saturday]
 let selectArray = [sundaySelect, mondaySelect, tuesdaySelect, wednesdaySelect, thursdaySelect, fridaySelect, saturdaySelect]
 
@@ -46,11 +47,12 @@ let matchingSelect
 let storedRecipes = []
 let storedRecipeAreas = []
 
+//create an option for each favorited recipe in the database for the seven select fields
 const createSelectOptions = async (select) => {
     const response = await fetch('/api/recipe');
     favorites = await response.json();
 
-    const createOption = (data) => {
+    function createOption(data) {
         let option = document.createElement('option')
         option.setAttribute('value', data.name)
         option.textContent = data.name
@@ -62,24 +64,28 @@ const createSelectOptions = async (select) => {
 
 selectArray.forEach(createSelectOptions)
 
+//find the select field in the same section as the clicked button
 const findMatchingSelect = (select) => {
     if (select.id.includes(clickedButton[0])) {
         return select
     }
 }
 
+//get the matching recipe object from the favorites array corresponding to the selected option
 const findSelectedRecipeId = (data) => {
     if (data.name === selectedRecipeName) {
         return data
     }
 }
 
+//find the recipe area in the same section as the clicked button
 const findMatchingRecipeArea = (recipeArea) => {
     if (recipeArea.id === clickedButton[0]) {
         return recipeArea
     }
 }
 
+//perform an api call for the recipe selected by the user, and then call a function to display it and a function to store it
 const getSelectedRecipe = async () => {
     const response = await fetch(`https://api.spoonacular.com/recipes/${selectedRecipeId.recipeId}/information?apiKey=36808371f778457eb823b528e2d0a3a6`)
     const data = await response.json()
@@ -87,12 +93,14 @@ const getSelectedRecipe = async () => {
     storeSelectedRecipe(data)
 }
 
+//perform an api call for a previously selected recipe and call a function to display it
 const getStoredRecipe = async () => {
     const response = await fetch(`https://api.spoonacular.com/recipes/${selectedRecipeId}/information?apiKey=36808371f778457eb823b528e2d0a3a6`)
     const data = await response.json()
     displaySelectedRecipe(data)
 }
 
+//call the previous matching functions when the user hits submit and call the function to make the api call
 const matchSelectedFields = (event) => {
     clickedButton = event.target.id.split('-')
     matchingSelect = selectArray.find(findMatchingSelect)
@@ -103,16 +111,17 @@ const matchSelectedFields = (event) => {
     getSelectedRecipe()
 }
 
+//store the selected recipe to local storage
 const storeSelectedRecipe = (data) => {
     localStorage.setItem(matchingRecipeArea.id, JSON.stringify(data))
 }
 
+//clear the recipe area
 const clearRecipeArea = () => {
-    if (matchingRecipeArea.innerText) {
-        matchingRecipeArea.innerText = ""
-    }
+    matchingRecipeArea.innerText = ""
 }
 
+//create various dom elements to display at-a-glance information about the selected recipe
 const displaySelectedRecipe = (data) => {
     clearRecipeArea()
 
@@ -129,7 +138,7 @@ const displaySelectedRecipe = (data) => {
     recipeImage.style.maxWidth = '200px'
     recipeTime.textContent = "Ready in " + data.readyInMinutes + " minutes"
 
-    const createIngredients = (ingredientObj) => {
+    function createIngredients(ingredientObj) {
         const ingredient = document.createElement('li')
         ingredient.textContent = ingredientObj.name
         recipeIngredients.appendChild(ingredient)
@@ -145,6 +154,7 @@ const displaySelectedRecipe = (data) => {
     matchingRecipeArea.appendChild(ingredientsDiv)
 }
 
+//looks for a stored recipe for each day of the week and pushes the results and corresponding recipe areas to their respective arrays
 const lookForStoredRecipes = (day) => {
     if (localStorage.getItem(day.id)) {
         storedRecipeAreas.push(day)
@@ -152,6 +162,7 @@ const lookForStoredRecipes = (day) => {
     }
 }
 
+//iterates through the stored recipes and their recipe areas to display information again upon refresh
 const displayStoredRecipes = (recipeArea, index) => {
     const titleDiv = document.createElement('div')
     const ingredientsDiv = document.createElement('section')
@@ -166,7 +177,7 @@ const displayStoredRecipes = (recipeArea, index) => {
     recipeImage.style.maxWidth = '200px'
     recipeTime.textContent = "Ready in " + storedRecipes[index].readyInMinutes + " minutes"
 
-    const createIngredients = (ingredientObj) => {
+    function createIngredients(ingredientObj) {
         const ingredient = document.createElement('li')
         ingredient.textContent = ingredientObj.name
         recipeIngredients.appendChild(ingredient)
@@ -180,28 +191,25 @@ const displayStoredRecipes = (recipeArea, index) => {
     ingredientsDiv.appendChild(recipeIngredients)
     recipeArea.appendChild(titleDiv)
     recipeArea.appendChild(ingredientsDiv)
-} 
+}
 
+//deletes the corresponding recipe from local storage and the page when the user clicks
 const deleteStoredRecipe = (event) => {
     let day = event.target.id.split('-')
     localStorage.removeItem(day[0])
 
     function findRecipeArea(recipeArea) {
-        if (recipeArea.id === clickedButton[0]) {
+        if (recipeArea.id === day[0]) {
             return recipeArea
         }
     }
 
     matchingRecipeArea = recipeAreaArray.find(findRecipeArea)
-    clearRecipeArea(matchingRecipeArea)
+    clearRecipeArea()
 }
 
 recipeAreaArray.forEach(lookForStoredRecipes)
 storedRecipeAreas.forEach(displayStoredRecipes)
-
-
-console.log(storedRecipeAreas)
-console.log(storedRecipes)
 
 
 sundayButton.addEventListener('click', matchSelectedFields)
@@ -219,3 +227,67 @@ wednesdayDelete.addEventListener('click', deleteStoredRecipe)
 thursdayDelete.addEventListener('click', deleteStoredRecipe)
 fridayDelete.addEventListener('click', deleteStoredRecipe)
 saturdayDelete.addEventListener('click', deleteStoredRecipe)
+
+
+//FAVORITES PAGE
+
+const favoritesNav = document.querySelector('#favorites')
+const favoritesSection = document.querySelector('#favorites-section')
+const mealPlannerDiv = document.querySelector('.weekday-div')
+const header = document.querySelector('#h1')
+
+const getFavorites = async () => {
+    const response = await fetch('/api/recipe');
+    favorites = await response.json();
+    console.log(favorites)
+    clearMealPlanner()
+    favorites.forEach(displayFavorites)
+}
+
+const clearMealPlanner = () => {
+    mealPlannerDiv.innerText = ''
+    header.textContent = 'Welcome to Quick Chef!'
+}
+
+const displayFavorites = (recipeData) => {
+    const favRecipeEl = document.createElement('article');
+    const favRecipeName = document.createElement('h2');
+    const favRecipeImage = document.createElement('img');
+    const favRecipeComments = document.createElement('input');
+    const commentsLabel = document.createElement('label');
+
+    const newComment = {
+        comment: favRecipeComments.value
+    }
+
+    favRecipeName.innerHTML = `<button>${recipeData.name}</button>`;
+    favRecipeName.setAttribute('class', 'recipe-name');
+    favRecipeName.querySelector('button').setAttribute('data-recipe-id', recipeData.recipeId);
+    favRecipeName.querySelector('button').addEventListener('click', function (event) {
+        recipeID = event.target.getAttribute('data-recipe-id');
+        getSpecificRecipe(recipeID);
+    });
+    favRecipeImage.src = recipeData.image;
+    // favRecipeComments.textContent = recipeData.comments;
+    favRecipeComments.setAttribute('class', 'fav-comments');
+    favRecipeComments.setAttribute('placeholder', 'Jot down your notes!');
+    commentsLabel.setAttribute('for', 'fav-comments');
+    commentsLabel.textContent = 'Share your thoughts or changes to the recipe:';
+
+    favoritesSection.appendChild(favRecipeEl);
+    favRecipeEl.appendChild(favRecipeName);
+    favRecipeEl.appendChild(favRecipeImage);
+    favRecipeEl.appendChild(commentsLabel);
+    favRecipeEl.appendChild(favRecipeComments);
+
+    const updateComments = (event) => {
+        if (event.key === 'Enter') {
+            updateRecipe(recipeData.id, newComment);
+        }
+    }
+    console.log(newComment)
+
+    favRecipeComments.addEventListener('keyup', updateComments);
+}
+
+favoritesNav.addEventListener('click', getFavorites)

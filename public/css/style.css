@@ -117,11 +117,33 @@ main {
     transition: 1s;
 }
 
+#page-button-container {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+    padding: 15px;
+}
+
+#page-button-container button {
+    background-color: #e85d04;
+    color: #fff;
+    width: 150px;
+    border-radius: 5px;
+    border: 1px solid #333;
+    cursor: pointer;
+    padding: 10px 15px;
+}
+
 #recipes-container {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
     gap: 30px;
+}
+
+#recipes-container div {
+    display: flex;
+    width: fit-content;
 }
 
 article {

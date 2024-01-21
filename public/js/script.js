@@ -5,6 +5,7 @@ const intolerancesCheckBox = document.querySelector('#intolerances')
 const recipesContainer = document.querySelector('#recipes-container');
 const myFavorites = document.querySelector('#favorites');
 const searchContainer = document.querySelector('#search-container');
+const pageButtonContainer = document.querySelector('#page-button-container')
 
 // let recipeID = 715415
 let recipeID;
@@ -88,29 +89,34 @@ const clearSearchArea = () => {
     searchContainer.textContent = '';
 }
 
+const clearPageButtonArea = () => {
+    pageButtonContainer.textContent = ''
+}
+
 const runNextPage = () => {
     pageIndex+=10
     createQueryFilters()
+    clearPageButtonArea()
 }
 
 const runPreviousPage = () => {
     pageIndex-=10
     createQueryFilters()
+    clearPageButtonArea()
 }
 
 const createPageButtons = () => {
-    const pageButtonEl = document.createElement('section')
-    if (pageIndex > 0) {
-        const prevButton = document.createElement('button')
-        prevButton.textContent = 'previous'
-        pageButtonEl.appendChild(prevButton)
-    }
-    
     const nextButton = document.createElement('button')
     nextButton.textContent = 'next'
     nextButton.addEventListener('click', runNextPage)
-    pageButtonEl.appendChild(nextButton)
-    recipesContainer.appendChild(pageButtonEl)
+    pageButtonContainer.appendChild(nextButton)
+
+    if (pageIndex > 0) {
+        const prevButton = document.createElement('button')
+        prevButton.textContent = 'previous'
+        prevButton.addEventListener('click', runPreviousPage)
+        pageButtonContainer.appendChild(prevButton)
+    }
 }
 
 const displayRecipes = (data) => {

@@ -193,7 +193,7 @@ const deleteStoredRecipe = (event) => {
     }
 
     matchingRecipeArea = recipeAreaArray.find(findRecipeArea)
-    clearRecipeArea(matchingRecipeArea)
+    clearRecipeArea()
 }
 
 recipeAreaArray.forEach(lookForStoredRecipes)

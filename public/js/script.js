@@ -207,6 +207,7 @@ const displayFavRecipe = (recipeData) => {
     const favRecipeImage = document.createElement('img');
     const commentInput = document.createElement('input');
     const commentsLabel = document.createElement('label');
+    const savedComment = document.createElement('p');
     let newComment = {
         comments: commentInput.value
     };
@@ -219,24 +220,24 @@ const displayFavRecipe = (recipeData) => {
         getSpecificRecipe(recipeID);
     });
     favRecipeImage.src = recipeData.image;
-    // commentInput.textContent = recipeData.comments;
     commentInput.setAttribute('class', 'fav-comments');
     commentInput.setAttribute('placeholder', 'Jot down your notes!');
     commentsLabel.setAttribute('for', 'fav-comments');
     commentsLabel.textContent = 'Share your thoughts or changes to the recipe:';
+    savedComment.textContent = newComment.comments;
 
     recipesContainer.appendChild(favRecipeEl);
     favRecipeEl.appendChild(favRecipeName);
     favRecipeEl.appendChild(favRecipeImage);
     favRecipeEl.appendChild(commentsLabel);
     favRecipeEl.appendChild(commentInput);
+    favRecipeEl.appendChild(savedComment);
 
     const updateComments = (event) => {
         if (event.key === 'Enter') {
             updateRecipe(recipeData.id, newComment);
         }
     }
-    console.log(recipeData.id)
 
     commentInput.addEventListener('keyup', updateComments);
 }

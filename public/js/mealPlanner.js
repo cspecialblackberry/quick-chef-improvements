@@ -33,7 +33,7 @@ const saturdayDelete = document.querySelector('#saturday-delete')
 let recipeAreaArray = [sunday, monday, tuesday, wednesday, thursday, friday, saturday]
 let selectArray = [sundaySelect, mondaySelect, tuesdaySelect, wednesdaySelect, thursdaySelect, fridaySelect, saturdaySelect]
 
-let favorites
+
 
 let clickedButton
 

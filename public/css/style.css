@@ -323,12 +323,13 @@ h3 {
 .clear-section {
     display: flex;
     width: 15%;
+    justify-content: center;
 }
 
 .clear-section button {
     width: 150px;
-    align-self:center;
     background-color: #f7feff;
     border: 1px solid #333; 
-    
+    max-height: 20px;
+    align-self: center;
 }

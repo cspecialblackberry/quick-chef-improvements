@@ -78,6 +78,7 @@ const getSpecificRecipe = async (recipeID) => {
     const data = await response.json()
     console.log(data)
     clearResultArea()
+    clearPageButtonArea()
     displaySpecificRecipe(data)
 }
 
@@ -136,6 +137,11 @@ const displayRecipes = (data) => {
 }
 
 const displaySpecificRecipe = (data) => {
+    const backButton = document.createElement('button')
+    backButton.textContent = 'back'
+    backButton.addEventListener('click', getRecipes)
+    backButton.addEventListener('click', clearPageButtonArea)
+    pageButtonContainer.appendChild(backButton)
 
     const recipeInfoEl = document.createElement('article')
     const recipeName = document.createElement('h2')

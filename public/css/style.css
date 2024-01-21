@@ -216,6 +216,18 @@ h3 {
 
 /*meal planner*/
 
+#favorites-section {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+#favorites-section div {
+    display: flex;
+    width: fit-content;
+}
+
 .weekday-div {
     margin-top: 20px;
     display: flex; 
@@ -243,7 +255,8 @@ h3 {
 }
 
 .input-section h2 {
-    color: black;
+    color: #333;
+    font-weight: bold;
     font-size: 1.7em;
     margin-bottom: 15px;
     margin-top: 15px;
@@ -268,7 +281,8 @@ h3 {
     width: 150px;
     align-self:center;
     background-color: #f7feff;
-    border: 1px solid #333;  
+    border: 1px solid #333;
+    border-radius: 5px;  
 }
 
 .recipe-section {
@@ -296,6 +310,8 @@ h3 {
 
 .recipe-section img {
     min-width: 200px;
+    border-radius: 10px;
+    border: solid 2px #333
 }
 
 .recipe-section section {
@@ -330,6 +346,7 @@ h3 {
     width: 150px;
     background-color: #f7feff;
     border: 1px solid #333; 
+    border-radius: 5px;
     max-height: 20px;
     align-self: center;
 }

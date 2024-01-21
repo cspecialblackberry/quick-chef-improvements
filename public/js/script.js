@@ -55,7 +55,7 @@ const createQueryFilters = (selection) => {
     let queryFilters = `&`
 
     for (key in selection) {
-        if (key === 'query' && selection[key] != '') {
+        if (key === 'includeIngredients' && selection[key] != '') {
             queryFilters += `${key}=${selection[key].join(',+')}&`
         } else if (key === 'intolerances' && selection[key] != '') {
             queryFilters += `${key}=${selection[key].join(',+')}&`

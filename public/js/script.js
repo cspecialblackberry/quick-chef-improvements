@@ -52,7 +52,7 @@ const getRecipes = async () => {
 
 const joinFilters = (queryFilters) => {
     let newQueryFilters = queryFilters.slice(0, -1)
-    baseURL = `https://api.spoonacular.com/recipes/complexSearch?apiKey=36808371f778457eb823b528e2d0a3a6&instructionsRequired=true&offset=${pageIndex}`
+    baseURL = `https://api.spoonacular.com/recipes/complexSearch?apiKey=44a9304fedc34c139bfc7622b4d3e00c&instructionsRequired=true&offset=${pageIndex}`
     baseURL += newQueryFilters
     getRecipes(baseURL)
 }
@@ -81,7 +81,7 @@ const saveClickedID = (event) => {
 }
 
 const getSpecificRecipe = async (recipeID) => {
-    const response = await fetch(`https://api.spoonacular.com/recipes/${recipeID}/information?apiKey=36808371f778457eb823b528e2d0a3a6`)
+    const response = await fetch(`https://api.spoonacular.com/recipes/${recipeID}/information?apiKey=44a9304fedc34c139bfc7622b4d3e00c`)
     const data = await response.json()
     console.log(data)
     clearResultArea()
@@ -175,7 +175,7 @@ const displaySpecificRecipe = (data) => {
             name: data.title,
             image: data.image,
             recipeId: data.id,
-            comments: ''
+            comments: []
         }
         postRecipes(newFavorite);
     }
@@ -251,10 +251,7 @@ const displayFavRecipe = (recipeData) => {
     const favRecipeImage = document.createElement('img');
     const commentInput = document.createElement('input');
     const commentsLabel = document.createElement('label');
-    const savedComment = document.createElement('p');
-    let newComment = {
-        comments: commentInput.value
-    };
+    const commentEl = document.createElement('p');
 
     favRecipeName.innerHTML = `<button>${recipeData.name}</button>`;
     favRecipeName.setAttribute('class', 'recipe-name');
@@ -268,27 +265,45 @@ const displayFavRecipe = (recipeData) => {
     commentInput.setAttribute('placeholder', 'Jot down your notes!');
     commentsLabel.setAttribute('for', 'fav-comments');
     commentsLabel.textContent = 'Share your thoughts or changes to the recipe:';
-    savedComment.textContent = newComment.comments;
+    commentEl.setAttribute('class', 'comments');
 
     recipesContainer.appendChild(favRecipeEl);
     favRecipeEl.appendChild(favRecipeName);
     favRecipeEl.appendChild(favRecipeImage);
     favRecipeEl.appendChild(commentsLabel);
     favRecipeEl.appendChild(commentInput);
-    favRecipeEl.appendChild(savedComment);
+    favRecipeEl.appendChild(commentEl)
+    displayComments(commentEl, recipeData);
 
-    const updateComments = (event) => {
-        if (event.key === 'Enter') {
-            updateRecipe(recipeData.id, newComment);
-        }
-    }
-
-    commentInput.addEventListener('keyup', updateComments);
+    commentInput.addEventListener('keyup', function(event) {
+        updateComments(event, recipeData, commentInput);
+    });
 }
 
 myFavorites.addEventListener('click', getFavoriteRecipes);
 
-const updateRecipe = async (id, newRecipeObj) => {
+const updateComments = (event, recipeData, commentInput) => {
+    let recipeEl = commentInput.parentElement;
+    let commentEl = recipeEl.querySelector('.comments');
+
+    if (event.key === 'Enter') {
+        let comments = commentEl.textContent;
+        if (comments.length > 0)  {
+            recipeData.comments = commentEl.textContent;
+            comments = recipeData.comments + ', ' + commentInput.value;
+        }
+        let newComment = {
+            comments: comments
+        };
+        updateRecipe(recipeData.id, newComment, commentEl);
+    }
+}
+
+const displayComments = (commentEl, object) => {
+    commentEl.textContent = object.comments;
+}
+
+const updateRecipe = async (id, newRecipeObj, comments) => {
     const response = await fetch(`/api/recipe/${id}`, {
         method: 'PUT',
         body: JSON.stringify(newRecipeObj),
@@ -297,10 +312,8 @@ const updateRecipe = async (id, newRecipeObj) => {
         }
     })
     const data = await response.json()
-    console.log(data)
+    displayComments(comments, newRecipeObj);
 }
-
-
 
 
 

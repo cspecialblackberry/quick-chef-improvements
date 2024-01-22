@@ -52,7 +52,7 @@ const getRecipes = async () => {
 
 const joinFilters = (queryFilters) => {
     let newQueryFilters = queryFilters.slice(0, -1)
-    baseURL = `https://api.spoonacular.com/recipes/complexSearch?apiKey=36808371f778457eb823b528e2d0a3a6&instructionsRequired=true&offset=${pageIndex}`
+    baseURL = `https://api.spoonacular.com/recipes/complexSearch?apiKey=44a9304fedc34c139bfc7622b4d3e00c&instructionsRequired=true&offset=${pageIndex}`
     baseURL += newQueryFilters
     getRecipes(baseURL)
 }
@@ -81,7 +81,7 @@ const saveClickedID = (event) => {
 }
 
 const getSpecificRecipe = async (recipeID) => {
-    const response = await fetch(`https://api.spoonacular.com/recipes/${recipeID}/information?apiKey=36808371f778457eb823b528e2d0a3a6`)
+    const response = await fetch(`https://api.spoonacular.com/recipes/${recipeID}/information?apiKey=44a9304fedc34c139bfc7622b4d3e00c`)
     const data = await response.json()
     console.log(data)
     clearResultArea()
@@ -279,6 +279,7 @@ const displayFavRecipe = (recipeData) => {
 
     const updateComments = (event) => {
         if (event.key === 'Enter') {
+            newComment.comments = commentInput.value;
             updateRecipe(recipeData.id, newComment);
         }
     }
@@ -299,8 +300,6 @@ const updateRecipe = async (id, newRecipeObj) => {
     const data = await response.json()
     console.log(data)
 }
-
-
 
 
 

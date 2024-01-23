@@ -30,6 +30,8 @@ const thursdayDelete = document.querySelector('#thursday-delete')
 const fridayDelete = document.querySelector('#friday-delete')
 const saturdayDelete = document.querySelector('#saturday-delete')
 
+const favoritesMessage = document.querySelector('#favorites-message')
+
 
 let recipeAreaArray = [sunday, monday, tuesday, wednesday, thursday, friday, saturday]
 let selectArray = [sundaySelect, mondaySelect, tuesdaySelect, wednesdaySelect, thursdaySelect, fridaySelect, saturdaySelect]
@@ -51,18 +53,21 @@ let storedRecipeAreas = []
 const createSelectOptions = async (select) => {
     const response = await fetch('/api/recipe');
     favorites = await response.json();
-
+    console.log(favorites)
     function createOption(data) {
         let option = document.createElement('option')
         option.setAttribute('value', data.name)
         option.textContent = data.name
         select.appendChild(option)
     }
-
+    if(favorites.name){
+        favoritesMessage.textContent = "You don't have any favorites yet, please search for some recipes you like so you can add them to your weekly planner!"
+    }else{
     favorites.forEach(createOption)
+    }
 }
 
-selectArray.forEach(createSelectOptions)
+_.map(selectArray, createSelectOptions)
 
 //find the select field in the same section as the clicked button
 const findMatchingSelect = (select) => {

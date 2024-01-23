@@ -15,8 +15,8 @@
     <header>
         <h1>Welcome to Quick Chef!</h1>
         <nav>
-            <a id="favorites">My Favorites</a>
             <a href="./index.html">Home</a>
+            <a href="./favoritesPage.html">My Favorites</a>
             <a href="./mealPlanner.html">Meal Planner</a>
         </nav>
     </header>
@@ -29,6 +29,7 @@
             <div id="time-container">
                 <label for="time-slider">How much time do you have?</label>
                 <input type="range" min="10" max="45" id="time-slider">
+                <label for="time-slider" id="time-slider-label">27</label>
             </div>
             <div id="multiselect">
                 <label for="intolerances">Any allergies or intolerances?</label>
@@ -43,6 +44,7 @@
             </div>
             <button id="recipe-search">Find Recipes</button>
         </section>
+        <section id="page-button-container"></section>
         <section id="recipes-container"></section>
     </main>
 </body>

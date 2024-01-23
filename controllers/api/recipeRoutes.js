@@ -12,13 +12,15 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
+  console.log(req.body)
   try {
     const newRecipe = await Recipe.create({
       ...req.body
     });
-
+console.log(newRecipe.toJSON)
     res.status(200).json(newRecipe);
   } catch (err) {
+    console.log(err)
     res.status(400).json(err);
   }
 });
@@ -35,6 +37,7 @@ router.put('/:id', async (req, res) => {
       res.status(404).json({ message: 'No recipe with this id!' });
       return;
     }
+    console.log(recipeData)
     res.status(200).json(recipeData);
   } catch (err) {
     res.status(500).json(err);

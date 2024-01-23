@@ -29,10 +29,13 @@ Recipe.init(
       type: DataTypes.INTEGER,
     },
     ingredients: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
     },
     instructions: {
-      type: DataTypes.STRING
+      type: DataTypes.TEXT,
+    },
+    diets: {
+      type: DataTypes.TEXT
     }
 
     // date_created: {

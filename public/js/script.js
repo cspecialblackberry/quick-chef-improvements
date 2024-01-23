@@ -178,7 +178,8 @@ const displaySpecificRecipe = (data) => {
             comments: '',
             readyTime: data.readyInMinutes,
             ingredients: JSON.stringify(data.extendedIngredients),
-            instructions: JSON.stringify(data.analyzedInstructions)
+            instructions: JSON.stringify(data.analyzedInstructions),
+            diets: JSON.stringify(data.diets)
         }
         postRecipes(newFavorite);
     }

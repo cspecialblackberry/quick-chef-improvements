@@ -81,7 +81,7 @@ const displaySpecificRecipe = (data) => {
 
     recipeName.textContent = data.title
     // favoriteButton.textContent = 'Favorite'
-    cookTime.textContent = "Ready in " + data.readyInMinutes + " minutes."
+    cookTime.textContent = "Ready in " + data.readyTime + " minutes."
     dietsTitle.textContent = "Diets:"
     recipeImage.src = data.image
     ingredientsTitle.textContent = "Ingredients:"
@@ -101,6 +101,7 @@ const displaySpecificRecipe = (data) => {
     // }
 
     // favoriteButton.addEventListener('click', storeFavorite);
+    console.log(data)
 
     const createDietList = (data) => {
         const diet = document.createElement('li')
@@ -108,7 +109,7 @@ const displaySpecificRecipe = (data) => {
         diets.appendChild(diet)
     }
 
-    data.diets.forEach(createDietList)
+    JSON.parse(data.diets).forEach(createDietList)
 
     const createIngredientsList = (data) => {
         const ingredient = document.createElement('li')
@@ -116,15 +117,15 @@ const displaySpecificRecipe = (data) => {
         ingredients.appendChild(ingredient)
     }
 
-    data.extendedIngredients.forEach(createIngredientsList)
+    JSON.parse(data.ingredients).forEach(createIngredientsList)
 
     const createInstructionsList = (data) => {
         const instruction = document.createElement('li')
         instruction.textContent = data.step
         instructions.appendChild(instruction)
     }
-
-    data.analyzedInstructions[0].steps.forEach(createInstructionsList)
+    
+    JSON.parse(data.instructions)[0].steps.forEach(createInstructionsList)
 
     favoritesContainer.appendChild(recipeInfoEl)
     recipeInfoEl.appendChild(recipeName)

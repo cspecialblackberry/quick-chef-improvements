@@ -138,7 +138,8 @@ main {
     padding: 10px 15px;
 }
 
-#recipes-container {
+#recipes-container,
+#favorites-container {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;

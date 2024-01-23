@@ -35,6 +35,7 @@ router.put('/:id', async (req, res) => {
       res.status(404).json({ message: 'No recipe with this id!' });
       return;
     }
+    console.log(recipeData)
     res.status(200).json(recipeData);
   } catch (err) {
     res.status(500).json(err);

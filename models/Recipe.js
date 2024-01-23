@@ -24,7 +24,17 @@ Recipe.init(
     },
     recipeId: {
       type: DataTypes.INTEGER,
+    },
+    readyTime: {
+      type: DataTypes.INTEGER,
+    },
+    ingredients: {
+      type: DataTypes.STRING,
+    },
+    instructions: {
+      type: DataTypes.STRING
     }
+
     // date_created: {
     //   type: DataTypes.DATE,
     //   allowNull: false,

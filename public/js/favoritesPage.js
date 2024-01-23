@@ -1,4 +1,5 @@
 const favoritesContainer = document.querySelector('#favorites-container');
+const pageButtonContainer = document.querySelector('#page-button-container');
 let favRecipesData = [];
 let recipeID;
 
@@ -18,8 +19,6 @@ const getSpecificRecipe = async (recipe) => {
     console.log('hi')
     if(recipe.recipeID === recipeID) {
         return recipe
-        // clearResultArea()
-        // displaySpecificRecipe(recipe)
     }
 }
 
@@ -61,11 +60,11 @@ const displayFavRecipe = (recipeData) => {
 
 const displaySpecificRecipe = (data) => {
     clearResultArea();
-    // const backButton = document.createElement('button')
-    // backButton.textContent = 'back'
-    // backButton.addEventListener('click', getRecipes)
-    // backButton.addEventListener('click', clearPageButtonArea)
-    // pageButtonContainer.appendChild(backButton)
+
+    const backButton = document.createElement('button')
+    backButton.textContent = 'back'
+    backButton.addEventListener('click', getFavoriteRecipes)
+    pageButtonContainer.appendChild(backButton)
 
     const recipeInfoEl = document.createElement('article')
     const recipeName = document.createElement('h2')

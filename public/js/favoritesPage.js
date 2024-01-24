@@ -3,6 +3,7 @@ const pageButtonContainer = document.querySelector('#page-button-container');
 let favRecipesData = [];
 let recipeID;
 
+// getting favorite recipes from the database
 const getFavoriteRecipes = async () => {
     const response = await fetch('/api/recipe');
     favRecipesData = await response.json();
@@ -16,13 +17,14 @@ const getFavoriteRecipes = async () => {
 
 getFavoriteRecipes();
 
+// getting the specific recipe when h2 is clicked
 const getSpecificRecipe = async (recipe) => {
-    console.log('hi')
     if(recipe.recipeID === recipeID) {
         return recipe
     }
 }
 
+// appending favorite recipe results info to page
 const displayFavRecipe = (recipeData) => {
     const favRecipeEl = document.createElement('article');
     const favRecipeName = document.createElement('h2');
@@ -59,6 +61,7 @@ const displayFavRecipe = (recipeData) => {
     });
 }
 
+// appending specific recipe info to page
 const displaySpecificRecipe = (data) => {
     clearResultArea();
 
@@ -140,10 +143,10 @@ const displaySpecificRecipe = (data) => {
     recipeInfoEl.appendChild(instructions)
 }
 
+// updating comments for favorite recipes
 const updateComments = (event, recipeData, commentInput) => {
     let recipeEl = commentInput.parentElement;
     let commentEl = recipeEl.querySelector('.comments');
-    console.log(recipeData)
     if (event.key === 'Enter') {
         let comments = commentEl.textContent;
         if (comments.length > 0)  {
@@ -161,8 +164,8 @@ const displayComments = (commentEl, object) => {
     commentEl.textContent = object.comments;
 }
 
+// put request
 const updateRecipe = async (id, newRecipeObj, comments) => {
-    console.log(id)
     const response = await fetch(`/api/recipe/${id}`, {
         method: 'PUT',
         body: JSON.stringify(newRecipeObj),
@@ -175,6 +178,7 @@ const updateRecipe = async (id, newRecipeObj, comments) => {
     displayComments(comments, newRecipeObj);
 }
 
+// clearing the results container
 const clearResultArea = () => {
     favoritesContainer.textContent = '';
 }

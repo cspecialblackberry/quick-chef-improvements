@@ -302,7 +302,6 @@ h3 {
 
 
 .recipe-section img {
-    min-width: 200px;
     border-radius: 10px;
     border: solid 2px #333
 }
@@ -396,11 +395,7 @@ h3 {
 
 @media screen and (max-width: 700px) {
 
-    .recipe-section {
-        background-color: white;
-    }
-
     .recipe-section img {
-        width: 125px;
+       width: 80%;
     }
 }

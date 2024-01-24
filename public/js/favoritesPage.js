@@ -6,6 +6,7 @@ let recipeID;
 const getFavoriteRecipes = async () => {
     const response = await fetch('/api/recipe');
     favRecipesData = await response.json();
+    console.log(favRecipesData)
     clearResultArea();
 
     for (let i = 0; i < favRecipesData.length; i++) {
@@ -142,7 +143,7 @@ const displaySpecificRecipe = (data) => {
 const updateComments = (event, recipeData, commentInput) => {
     let recipeEl = commentInput.parentElement;
     let commentEl = recipeEl.querySelector('.comments');
-
+    console.log(recipeData)
     if (event.key === 'Enter') {
         let comments = commentEl.textContent;
         if (comments.length > 0)  {
@@ -161,6 +162,7 @@ const displayComments = (commentEl, object) => {
 }
 
 const updateRecipe = async (id, newRecipeObj, comments) => {
+    console.log(id)
     const response = await fetch(`/api/recipe/${id}`, {
         method: 'PUT',
         body: JSON.stringify(newRecipeObj),

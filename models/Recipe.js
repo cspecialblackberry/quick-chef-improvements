@@ -29,10 +29,10 @@ Recipe.init(
       type: DataTypes.INTEGER,
     },
     ingredients: {
-      type: DataTypes.TEXT,
+      type: DataTypes.TEXT("long"),
     },
     instructions: {
-      type: DataTypes.TEXT,
+      type: DataTypes.TEXT("long"),
     },
     diets: {
       type: DataTypes.TEXT

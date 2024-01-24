@@ -30,6 +30,8 @@ const thursdayDelete = document.querySelector('#thursday-delete')
 const fridayDelete = document.querySelector('#friday-delete')
 const saturdayDelete = document.querySelector('#saturday-delete')
 
+const favoritesMessage = document.querySelector('#favorites-message')
+
 
 let recipeAreaArray = [sunday, monday, tuesday, wednesday, thursday, friday, saturday]
 let selectArray = [sundaySelect, mondaySelect, tuesdaySelect, wednesdaySelect, thursdaySelect, fridaySelect, saturdaySelect]
@@ -51,18 +53,21 @@ let storedRecipeAreas = []
 const createSelectOptions = async (select) => {
     const response = await fetch('/api/recipe');
     favorites = await response.json();
-
+    console.log(favorites)
     function createOption(data) {
         let option = document.createElement('option')
         option.setAttribute('value', data.name)
         option.textContent = data.name
         select.appendChild(option)
     }
-
+    if(favorites.name){
+        favoritesMessage.textContent = "You don't have any favorites yet, please search for some recipes you like so you can add them to your weekly planner!"
+    }else{
     favorites.forEach(createOption)
+    }
 }
 
-selectArray.forEach(createSelectOptions)
+_.map(selectArray, createSelectOptions)
 
 //find the select field in the same section as the clicked button
 const findMatchingSelect = (select) => {
@@ -85,30 +90,16 @@ const findMatchingRecipeArea = (recipeArea) => {
     }
 }
 
-//perform an api call for the recipe selected by the user, and then call a function to display it and a function to store it
-const getSelectedRecipe = async () => {
-    const response = await fetch(`https://api.spoonacular.com/recipes/${selectedRecipeId.recipeId}/information?apiKey=36808371f778457eb823b528e2d0a3a6`)
-    const data = await response.json()
-    displaySelectedRecipe(data)
-    storeSelectedRecipe(data)
-}
-
-//perform an api call for a previously selected recipe and call a function to display it
-const getStoredRecipe = async () => {
-    const response = await fetch(`https://api.spoonacular.com/recipes/${selectedRecipeId}/information?apiKey=36808371f778457eb823b528e2d0a3a6`)
-    const data = await response.json()
-    displaySelectedRecipe(data)
-}
-
 //call the previous matching functions when the user hits submit and call the function to make the api call
 const matchSelectedFields = (event) => {
     clickedButton = event.target.id.split('-')
-    matchingSelect = selectArray.find(findMatchingSelect)
+    matchingSelect = _.find(selectArray, findMatchingSelect)
     selectedRecipeName = matchingSelect.value
-    selectedRecipeId = favorites.find(findSelectedRecipeId)
-    matchingRecipeArea = recipeAreaArray.find(findMatchingRecipeArea)
+    selectedRecipeId = _.find(favorites, findSelectedRecipeId)
+    matchingRecipeArea = _.find(recipeAreaArray, findMatchingRecipeArea)
 
-    getSelectedRecipe()
+    displaySelectedRecipe(selectedRecipeId)
+    storeSelectedRecipe(selectedRecipeId)
 }
 
 //store the selected recipe to local storage
@@ -123,6 +114,7 @@ const clearRecipeArea = () => {
 
 //create various dom elements to display at-a-glance information about the selected recipe
 const displaySelectedRecipe = (data) => {
+    console.log(data)
     clearRecipeArea()
 
     const titleDiv = document.createElement('div')
@@ -133,10 +125,10 @@ const displaySelectedRecipe = (data) => {
     const recipeTime = document.createElement('h3')
     const recipeIngredients = document.createElement('ul')
 
-    recipeName.textContent = data.title
+    recipeName.textContent = data.name
     recipeImage.src = data.image
     recipeImage.style.maxWidth = '200px'
-    recipeTime.textContent = "Ready in " + data.readyInMinutes + " minutes"
+    recipeTime.textContent = "Ready in " + data.readyTime + " minutes"
 
     function createIngredients(ingredientObj) {
         const ingredient = document.createElement('li')
@@ -144,7 +136,7 @@ const displaySelectedRecipe = (data) => {
         recipeIngredients.appendChild(ingredient)
     }
 
-    data.extendedIngredients.forEach(createIngredients)
+    _.map(JSON.parse(data.ingredients), createIngredients)
 
     titleDiv.appendChild(recipeName)
     titleDiv.appendChild(recipeImage)
@@ -172,10 +164,10 @@ const displayStoredRecipes = (recipeArea, index) => {
     const recipeTime = document.createElement('h3')
     const recipeIngredients = document.createElement('ul')
 
-    recipeName.textContent = storedRecipes[index].title
+    recipeName.textContent = storedRecipes[index].name
     recipeImage.src = storedRecipes[index].image
     recipeImage.style.maxWidth = '200px'
-    recipeTime.textContent = "Ready in " + storedRecipes[index].readyInMinutes + " minutes"
+    recipeTime.textContent = "Ready in " + storedRecipes[index].readyTime + " minutes"
 
     function createIngredients(ingredientObj) {
         const ingredient = document.createElement('li')
@@ -183,7 +175,7 @@ const displayStoredRecipes = (recipeArea, index) => {
         recipeIngredients.appendChild(ingredient)
     }
 
-    storedRecipes[index].extendedIngredients.forEach(createIngredients)
+    _.map(JSON.parse(storedRecipes[index].ingredients), createIngredients)
 
     titleDiv.appendChild(recipeName)
     titleDiv.appendChild(recipeImage)
@@ -204,12 +196,12 @@ const deleteStoredRecipe = (event) => {
         }
     }
 
-    matchingRecipeArea = recipeAreaArray.find(findRecipeArea)
+    matchingRecipeArea = _.find(recipeAreaArray, findRecipeArea)
     clearRecipeArea()
 }
 
-recipeAreaArray.forEach(lookForStoredRecipes)
-storedRecipeAreas.forEach(displayStoredRecipes)
+_.map(recipeAreaArray, lookForStoredRecipes)
+_.map(storedRecipeAreas, displayStoredRecipes)
 
 
 sundayButton.addEventListener('click', matchSelectedFields)

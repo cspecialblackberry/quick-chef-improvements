@@ -134,7 +134,6 @@ const updateComments = (event, recipeData, commentInput) => {
         console.log(comments)
         if (comments.length > 0)  {
             recipeData.comments = commentEl.textContent;
-            console.log(recipeData)
             comments = recipeData.comments + ', ' + commentInput.value;
         } else {
             comments = commentInput.value;
@@ -160,7 +159,6 @@ const updateRecipe = async (id, newRecipeObj, comments) => {
         }
     })
     const data = await response.json()
-    console.log(data)
     displayComments(comments, newRecipeObj);
 }
 

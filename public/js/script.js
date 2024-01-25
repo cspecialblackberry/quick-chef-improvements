@@ -8,7 +8,6 @@ const myFavorites = document.querySelector('#favorites');
 const searchContainer = document.querySelector('#search-container');
 const pageButtonContainer = document.querySelector('#page-button-container')
 
-
 const updateTime = () => {
     timeSliderLabel.textContent = timeSlider.value
 }
@@ -77,7 +76,6 @@ const createQueryFilters = (selection) => {
 const saveClickedID = (event) => {
     recipeID = event.target.parentElement.id
     getSpecificRecipe(recipeID)
-
 }
 
 const getSpecificRecipe = async (recipeID) => {
@@ -152,7 +150,8 @@ const displaySpecificRecipe = (data) => {
 
     const recipeInfoEl = document.createElement('article')
     const recipeName = document.createElement('h2')
-    const favoriteButton = document.createElement('button')
+    const favoriteButton = document.createElement('button');
+    favoriteButton.setAttribute('class', 'favorite-button');
     const cookTime = document.createElement('p')
     const dietsTitle = document.createElement('h3')
     const diets = document.createElement('ul')
@@ -236,4 +235,3 @@ const postRecipes = async (recipeObj) => {
 
     console.log(data)
 }
-

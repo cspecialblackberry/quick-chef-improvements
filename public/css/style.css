@@ -212,6 +212,20 @@ h3 {
     margin-top: 10px;
 }
 
+.favorite-button {
+    background-color: rgb(255, 238, 165);
+    border-radius: 5px;
+    border: 1px solid #333;
+    cursor: pointer;
+    padding: 10px 15px;
+    text-transform: uppercase;
+}
+
+.favorite-button:hover {
+    background-color: rgb(255, 216, 45);
+    transition: 1s;
+}
+
 
     @media screen and (min-width: 480px) {
         #search-container {

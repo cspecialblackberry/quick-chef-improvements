@@ -150,7 +150,8 @@ const displaySpecificRecipe = (data) => {
 
     const recipeInfoEl = document.createElement('article')
     const recipeName = document.createElement('h2')
-    const favoriteButton = document.createElement('button')
+    const favoriteButton = document.createElement('button');
+    favoriteButton.setAttribute('class', 'favorite-button');
     const cookTime = document.createElement('p')
     const dietsTitle = document.createElement('h3')
     const diets = document.createElement('ul')

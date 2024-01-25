@@ -8,13 +8,13 @@ const myFavorites = document.querySelector('#favorites');
 const searchContainer = document.querySelector('#search-container');
 const pageButtonContainer = document.querySelector('#page-button-container')
 
+
 const updateTime = () => {
     timeSliderLabel.textContent = timeSlider.value
 }
 
 timeSlider.addEventListener('input', updateTime)
 
-// let recipeID = 715415
 let recipeID;
 let pageIndex = 0
 
@@ -192,7 +192,7 @@ const displaySpecificRecipe = (data) => {
         diets.appendChild(diet)
     }
 
-    data.diets.forEach(createDietList)
+    _.map(data.diets, createDietList)
 
     const createIngredientsList = (data) => {
         const ingredient = document.createElement('li')
@@ -200,7 +200,7 @@ const displaySpecificRecipe = (data) => {
         ingredients.appendChild(ingredient)
     }
 
-    data.extendedIngredients.forEach(createIngredientsList)
+    _.map(data.extendedIngredients, createIngredientsList)
 
     const createInstructionsList = (data) => {
         const instruction = document.createElement('li')
@@ -208,7 +208,7 @@ const displaySpecificRecipe = (data) => {
         instructions.appendChild(instruction)
     }
 
-    data.analyzedInstructions[0].steps.forEach(createInstructionsList)
+    _.map(data.analyzedInstructions[0].steps, createInstructionsList)
 
     recipesContainer.appendChild(recipeInfoEl)
     recipeInfoEl.appendChild(recipeName)

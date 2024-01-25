@@ -7,7 +7,6 @@ let recipeID;
 const getFavoriteRecipes = async () => {
     const response = await fetch('/api/recipe');
     favRecipesData = await response.json();
-    console.log(favRecipesData)
     clearResultArea();
     clearPageButtonArea();
 

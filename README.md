@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+# quick-chef-app
+
+=======
 # <Your-Project-Title>
 
 ## Description
@@ -63,3 +67,4 @@ If you created an application or package and would like other developers to cont
 ## Tests
 
 Go the extra mile and write tests for your application. Then provide examples on how to run them here.
+>>>>>>> 5d48b25c0d51dafc5f1b2be9d87aa857c48112ff

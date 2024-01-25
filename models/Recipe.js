@@ -32,7 +32,7 @@ Recipe.init(
       type: DataTypes.TEXT("long"),
     },
     instructions: {
-      type: DataTypes.TEXT("long"),
+      type: DataTypes.BLOB,
     },
     diets: {
       type: DataTypes.TEXT

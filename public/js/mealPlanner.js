@@ -63,7 +63,7 @@ const createSelectOptions = async (select) => {
     if(favorites.name){
         favoritesMessage.textContent = "You don't have any favorites yet, please search for some recipes you like so you can add them to your weekly planner!"
     }else{
-    favorites.forEach(createOption)
+    _.map(favorites, createOption)
     }
 }
 

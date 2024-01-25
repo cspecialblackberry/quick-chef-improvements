@@ -138,7 +138,7 @@ const updateComments = (event, recipeData, commentInput) => {
             comments = commentInput.value;
         }
         let newComment = {
-            comments: comments
+            comments: ''
         };
         updateRecipe(recipeData.id, newComment, commentEl);
     }

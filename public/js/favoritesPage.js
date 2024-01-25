@@ -145,8 +145,8 @@ const updateComments = (event, recipeData, commentInput) => {
 }
 
 // displaying comments on page
-const displayComments = (commentEl, object) => {
-    commentEl.textContent = object.comments;
+const displayComments = (commentEl, newComment) => {
+    commentEl.textContent = newComment.comments;
 }
 
 // put request to update comments

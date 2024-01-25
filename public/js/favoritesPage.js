@@ -149,18 +149,26 @@ const updateComments = (event, recipeData, commentInput) => {
     let commentEl = recipeEl.querySelector('.comments');
     if (event.key === 'Enter') {
         let comments = commentEl.textContent;
+        console.log(comments)
         if (comments.length > 0)  {
             recipeData.comments = commentEl.textContent;
+            console.log(recipeData)
             comments = recipeData.comments + ', ' + commentInput.value;
+        } else {
+            comments = commentInput.value;
         }
         let newComment = {
             comments: comments
         };
+        console.log(newComment)
+        console.log(commentInput.value)
         updateRecipe(recipeData.id, newComment, commentEl);
     }
 }
 
 const displayComments = (commentEl, object) => {
+    console.log(commentEl)
+    console.log(object)
     commentEl.textContent = object.comments;
 }
 

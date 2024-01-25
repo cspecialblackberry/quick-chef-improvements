@@ -8,7 +8,6 @@ const myFavorites = document.querySelector('#favorites');
 const searchContainer = document.querySelector('#search-container');
 const pageButtonContainer = document.querySelector('#page-button-container')
 
-
 const updateTime = () => {
     timeSliderLabel.textContent = timeSlider.value
 }
@@ -77,7 +76,6 @@ const createQueryFilters = (selection) => {
 const saveClickedID = (event) => {
     recipeID = event.target.parentElement.id
     getSpecificRecipe(recipeID)
-
 }
 
 const getSpecificRecipe = async (recipeID) => {
@@ -236,4 +234,3 @@ const postRecipes = async (recipeObj) => {
 
     console.log(data)
 }
-

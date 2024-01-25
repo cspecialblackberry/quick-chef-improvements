@@ -144,11 +144,12 @@ const updateComments = (event, recipeData, commentInput) => {
     }
 }
 
+// displaying comments on page
 const displayComments = (commentEl, object) => {
     commentEl.textContent = object.comments;
 }
 
-// put request
+// put request to update comments
 const updateRecipe = async (id, newRecipeObj, comments) => {
     const response = await fetch(`/api/recipe/${id}`, {
         method: 'PUT',
@@ -166,6 +167,7 @@ const clearResultArea = () => {
     favoritesContainer.textContent = '';
 }
 
+// clearing the back buttons
 const clearPageButtonArea = () => {
     pageButtonContainer.textContent = '';
 }

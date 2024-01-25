@@ -1,42 +1,27 @@
-# <Your-Project-Title>
+# Quick Chef App
 
 ## Description
 
-Provide a short description explaining the what, why, and how of your project. Use the following questions as a guide:
+Quick Chef was created so that the user can find recipes to fit their time constraints, ingredient choices, and food intolerances. We used the Spoonacular API to retrieve recipe data using a get request. The user can find recipes that match their criteria and 'favorite' the ones they want to come back to. Using a post request, we store favorite recipes to the database and display them on the My Favorites page. We also learned how to use put requests, allowing users to update their favorite recipes with unique comments for each.
 
-- What was your motivation?
-- Why did you build this project? (Note: the answer is not "Because it was a homework assignment.")
-- What problem does it solve?
-- What did you learn?
+We created a Meal Planner page where users can select daily recipes from their favorites for the week. When selected, the chosen recipes are stored locally so that the user can view them each time they visit the website.
 
-## Table of Contents (Optional)
+A new technology we worked with for this website was Lodash. We used the _.map() method to iterate through arrays, and the _.find() method to get a matching object from an array.
 
-If your README is long, add a table of contents to make it easy for users to find what they need.
+In our CSS, we utilized flexbox and media queries to create a clean and responsive design.
 
-- [Installation](#installation)
-- [Usage](#usage)
-- [Credits](#credits)
-- [License](#license)
-
-## Installation
-
-What are the steps required to install your project? Provide a step-by-step description of how to get the development environment running.
+![Quick Chef App]()
+[Deployed Website]()
 
 ## Usage
 
-Provide instructions and examples for use. Include screenshots as needed.
+On the home page, the user can select a specific ingredient to include, a timeframe they'd like to stay within, and any intolerances they might have. When they click find recipes, they'll be presented with recipe results matching their desired criteria. When the user clicks on a given recipe, they'll see more details about that specific recipe, such as the cook time, ingredients, instructions, and the diets the recipe will fit in. The user can add the recipe to their Favorites by clicking the favorite button.
 
-To add a screenshot, create an `assets/images` folder in your repository and upload your screenshot to it. Then, using the relative file path, add it to your README using the following syntax:
-
-![alt text](assets/images/screenshot.png)
+When the user goes to the My Favorites page, they'll be presented with every recipe they've added to their favorites. On the Meal Planner page, the user can select one recipe from their list of favorites for each day of the week. These recipes are stored locally so the user can retrieve them when they return to the page.
 
 ## Credits
 
-List your collaborators, if any, with links to their GitHub profiles.
-
-If you used any third-party assets that require attribution, list the creators with links to their primary web presence in this section.
-
-If you followed tutorials, include links to those here as well.
+I collaborated with Charles Hall (github link) on this website.
 
 ## License
 
@@ -46,20 +31,6 @@ The last section of a high-quality README file is the license. This lets other d
 
 🏆 The previous sections are the bare minimum, and your project will ultimately determine the content of this document. You might also want to consider adding the following sections.
 
-## Badges
-
-![badmath](https://img.shields.io/github/languages/top/nielsenjared/badmath)
-
-Badges aren't necessary, but they demonstrate street cred. Badges let other developers know that you know what you're doing. Check out the badges hosted by [shields.io](https://shields.io/). You may not understand what they all represent now, but you will in time.
-
 ## Features
 
 If your project has a lot of features, list them here.
-
-## How to Contribute
-
-If you created an application or package and would like other developers to contribute to it, you can include guidelines for how to do so. The [Contributor Covenant](https://www.contributor-covenant.org/) is an industry standard, but you can always write your own if you'd prefer.
-
-## Tests
-
-Go the extra mile and write tests for your application. Then provide examples on how to run them here.

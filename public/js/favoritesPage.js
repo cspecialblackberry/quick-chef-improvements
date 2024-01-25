@@ -138,7 +138,7 @@ const updateComments = (event, recipeData, commentInput) => {
         if (comments.length > 0)  {
             recipeData.comments = commentEl.textContent;
             comments = recipeData.comments + ', ' + commentInput.value;
-        }
+        } 
         let newComment = {
             comments: ''
         };

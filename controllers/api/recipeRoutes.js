@@ -27,14 +27,12 @@ console.log(newRecipe.toJSON)
 
 
 router.put('/:id', async (req, res) => {
-  console.log(req.body)
   try {
     const recipeData = await Recipe.update(req.body, {
       where: {
         id: req.params.id,
       },
     });
-    console.log(recipeData)
     if (!recipeData[0]) {
       res.status(404).json({ message: 'No recipe with this id!' });
       return;

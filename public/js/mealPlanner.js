@@ -127,6 +127,7 @@ const displaySelectedRecipe = (data) => {
 
     recipeName.textContent = data.name
     recipeImage.src = data.image
+    recipeImage.style.maxWidth = '200px'
     recipeTime.textContent = "Ready in " + data.readyTime + " minutes"
 
     function createIngredients(ingredientObj) {

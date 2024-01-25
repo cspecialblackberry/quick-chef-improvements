@@ -33,12 +33,13 @@ a:hover {
 
 nav {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-evenly;
+    flex-direction: center;
 }
 
 nav a {
     text-transform: uppercase;
-    margin-right: 25px;
+    font-size: .8em;
 }
 
 main {
@@ -226,10 +227,24 @@ h3 {
     transition: 1s;
 }
 
+.break {
+    flex-basis: 100%;
+    height: 0;
+}
+
 
     @media screen and (min-width: 480px) {
         #search-container {
             flex-direction: row;
+        }
+
+        nav {
+            justify-content: center;
+        }
+
+        nav a {
+            margin-right: 15px;
+            margin-left: 15px;
         }
     }
 

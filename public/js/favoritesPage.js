@@ -7,8 +7,8 @@ let recipeID;
 const getFavoriteRecipes = async () => {
     const response = await fetch('/api/recipe');
     favRecipesData = await response.json();
-    console.log(favRecipesData)
     clearResultArea();
+    clearPageButtonArea();
 
     for (let i = 0; i < favRecipesData.length; i++) {
         displayFavRecipe(favRecipesData[i]);
@@ -72,7 +72,6 @@ const displaySpecificRecipe = (data) => {
 
     const recipeInfoEl = document.createElement('article')
     const recipeName = document.createElement('h2')
-    
     const cookTime = document.createElement('p')
     const dietsTitle = document.createElement('h3')
     const diets = document.createElement('ul')
@@ -83,15 +82,11 @@ const displaySpecificRecipe = (data) => {
     const instructions = document.createElement('ol')
 
     recipeName.textContent = data.title
-  
     cookTime.textContent = "Ready in " + data.readyTime + " minutes."
     dietsTitle.textContent = "Diets:"
     recipeImage.src = data.image
     ingredientsTitle.textContent = "Ingredients:"
     instructionsTitle.textContent = "Instructions:"
-
-
-    console.log(data)
 
     const createDietList = (data) => {
         const diet = document.createElement('li')
@@ -99,7 +94,7 @@ const displaySpecificRecipe = (data) => {
         diets.appendChild(diet)
     }
 
-    JSON.parse(data.diets).forEach(createDietList)
+    _.map(JSON.parse(data.diets), createDietList)
 
     const createIngredientsList = (data) => {
         const ingredient = document.createElement('li')
@@ -107,7 +102,7 @@ const displaySpecificRecipe = (data) => {
         ingredients.appendChild(ingredient)
     }
 
-    JSON.parse(data.ingredients).forEach(createIngredientsList)
+    _.map(JSON.parse(data.ingredients), createIngredientsList)
 
     const createInstructionsList = (data) => {
         const instruction = document.createElement('li')
@@ -115,7 +110,7 @@ const displaySpecificRecipe = (data) => {
         instructions.appendChild(instruction)
     }
     
-    JSON.parse(data.instructions)[0].steps.forEach(createInstructionsList)
+    _.map(JSON.parse(data.instructions)[0].steps, createInstructionsList)
 
     favoritesContainer.appendChild(recipeInfoEl)
     recipeInfoEl.appendChild(recipeName)
@@ -135,10 +130,13 @@ const updateComments = (event, recipeData, commentInput) => {
     let commentEl = recipeEl.querySelector('.comments');
     if (event.key === 'Enter') {
         let comments = commentEl.textContent;
+        console.log(comments)
         if (comments.length > 0)  {
             recipeData.comments = commentEl.textContent;
             comments = recipeData.comments + ', ' + commentInput.value;
-        } 
+        } else {
+            comments = commentInput.value;
+        }
         let newComment = {
             comments: ''
         };
@@ -160,11 +158,14 @@ const updateRecipe = async (id, newRecipeObj, comments) => {
         }
     })
     const data = await response.json()
-    console.log(data)
     displayComments(comments, newRecipeObj);
 }
 
 // clearing the results container
 const clearResultArea = () => {
     favoritesContainer.textContent = '';
+}
+
+const clearPageButtonArea = () => {
+    pageButtonContainer.textContent = '';
 }

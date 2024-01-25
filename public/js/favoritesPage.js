@@ -69,7 +69,7 @@ const displaySpecificRecipe = (data) => {
 
     const recipeInfoEl = document.createElement('article')
     const recipeName = document.createElement('h2')
-    // const favoriteButton = document.createElement('button')
+    
     const cookTime = document.createElement('p')
     const dietsTitle = document.createElement('h3')
     const diets = document.createElement('ul')
@@ -80,27 +80,14 @@ const displaySpecificRecipe = (data) => {
     const instructions = document.createElement('ol')
 
     recipeName.textContent = data.title
-    // favoriteButton.textContent = 'Favorite'
+  
     cookTime.textContent = "Ready in " + data.readyTime + " minutes."
     dietsTitle.textContent = "Diets:"
     recipeImage.src = data.image
     ingredientsTitle.textContent = "Ingredients:"
     instructionsTitle.textContent = "Instructions:"
 
-    // const storeFavorite = () => {
-    //     let newFavorite = {
-    //         name: data.title,
-    //         image: data.image,
-    //         recipeId: data.id,
-    //         comments: '',
-    //         readyTime: data.readyInMinutes,
-    //         ingredients: JSON.stringify(data.extendedIngredients),
-    //         instructions: JSON.stringify(data.analyzedInstructions)
-    //     }
-    //     postRecipes(newFavorite);
-    // }
 
-    // favoriteButton.addEventListener('click', storeFavorite);
     console.log(data)
 
     const createDietList = (data) => {
@@ -129,7 +116,6 @@ const displaySpecificRecipe = (data) => {
 
     favoritesContainer.appendChild(recipeInfoEl)
     recipeInfoEl.appendChild(recipeName)
-    // recipeInfoEl.appendChild(favoriteButton)
     recipeInfoEl.appendChild(cookTime)
     recipeInfoEl.appendChild(dietsTitle)
     recipeInfoEl.appendChild(diets)
@@ -151,7 +137,7 @@ const updateComments = (event, recipeData, commentInput) => {
             comments = recipeData.comments + ', ' + commentInput.value;
         }
         let newComment = {
-            comments: comments
+            comments: ''
         };
         updateRecipe(recipeData.id, newComment, commentEl);
     }

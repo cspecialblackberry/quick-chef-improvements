@@ -14,7 +14,6 @@ const updateTime = () => {
 
 timeSlider.addEventListener('input', updateTime)
 
-// let recipeID = 715415
 let recipeID;
 let pageIndex = 0
 

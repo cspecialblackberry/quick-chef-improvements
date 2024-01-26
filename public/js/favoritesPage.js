@@ -109,7 +109,7 @@ const displaySpecificRecipe = (data) => {
         instruction.textContent = data.step
         instructions.appendChild(instruction)
     }
-    
+
     _.map(JSON.parse(data.instructions)[0].steps, createInstructionsList)
 
     favoritesContainer.appendChild(recipeInfoEl)

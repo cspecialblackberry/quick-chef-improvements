@@ -282,7 +282,7 @@ h3 {
     min-height: 200px;
     height: auto;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     padding-bottom: 15px;
     border-bottom: 1px solid #333;
 }
@@ -319,11 +319,12 @@ h3 {
 }
 
 .input-section button {
-    width: 150px;
+    width: 100px;
     align-self:center;
     background-color: #f7feff;
     border: 1px solid #333;
-    border-radius: 5px;  
+    border-radius: 5px;
+    padding: 5px 10px; 
 }
 
 .recipe-section {
@@ -378,11 +379,11 @@ h3 {
 }
 
 .clear-section button {
-    width: 150px;
+    width: 100px;
     background-color: #f7feff;
     border: 1px solid #333; 
     border-radius: 5px;
-    max-height: 20px;
+    padding: 5px 10px;
     align-self: center;
 }
 

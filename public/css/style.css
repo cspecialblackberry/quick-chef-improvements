@@ -363,9 +363,11 @@ h3 {
 
 .recipe-section section ul {
     display: flex;
-    flex-flow: row wrap;
-    text-align: center;
+    flex-wrap: wrap;
+    justify-content: center;
     list-style-type: circle;
+    margin-right: 5px;
+    margin-left: 5px;
 }
 
 .recipe-section section ul li {

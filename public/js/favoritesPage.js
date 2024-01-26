@@ -18,11 +18,9 @@ const getFavoriteRecipes = async () => {
 getFavoriteRecipes();
 
 // getting the specific recipe when h2 is clicked
-const getSpecificRecipe = async (recipe) => {
-    if(recipe.recipeID === recipeID) {
-        return recipe
-    }
-}
+const getSpecificRecipe = (recipe) => {
+    return recipe.recipeId == recipeID
+}        
 
 // appending favorite recipe results info to page
 const displayFavRecipe = (recipeData) => {
@@ -69,7 +67,7 @@ const displayFavRecipe = (recipeData) => {
 // appending specific recipe info to page
 const displaySpecificRecipe = (data) => {
     clearResultArea();
-
+    console.log(data)
     const backButton = document.createElement('button')
     backButton.textContent = 'back'
     backButton.addEventListener('click', getFavoriteRecipes)
@@ -115,7 +113,6 @@ const displaySpecificRecipe = (data) => {
         instructions.appendChild(instruction)
     }
     
-    console.log(JSON.parse(data.instructions)[0].steps)
     _.map(JSON.parse(data.instructions)[0].steps, createInstructionsList)
 
     favoritesContainer.appendChild(recipeInfoEl)
@@ -151,8 +148,8 @@ const updateComments = (event, recipeData, commentInput) => {
 }
 
 // displaying comments on page
-const displayComments = (commentEl, object) => {
-    commentEl.textContent = object.comments;
+const displayComments = (commentEl, newComment) => {
+    commentEl.textContent = newComment.comments;
 }
 
 // put request to update comments

@@ -18,11 +18,9 @@ const getFavoriteRecipes = async () => {
 getFavoriteRecipes();
 
 // getting the specific recipe when h2 is clicked
-const getSpecificRecipe = async (recipe) => {
-    if(recipe.recipeID === recipeID) {
-        return recipe
-    }
-}
+const getSpecificRecipe = (recipe) => {
+    return recipe.recipeId == recipeID
+}        
 
 // appending favorite recipe results info to page
 const displayFavRecipe = (recipeData) => {
@@ -38,7 +36,9 @@ const displayFavRecipe = (recipeData) => {
     favRecipeName.querySelector('button').setAttribute('data-recipe-id', recipeData.recipeId);
     favRecipeName.querySelector('button').addEventListener('click', function (event) {
         recipeID = event.target.getAttribute('data-recipe-id');
+        console.log(favRecipesData)
         const specificRecipe = favRecipesData.find(getSpecificRecipe);
+        console.log(specificRecipe)
         displaySpecificRecipe(specificRecipe);
     });
     favRecipeImage.src = recipeData.image;
@@ -64,7 +64,7 @@ const displayFavRecipe = (recipeData) => {
 // appending specific recipe info to page
 const displaySpecificRecipe = (data) => {
     clearResultArea();
-
+    console.log(data)
     const backButton = document.createElement('button')
     backButton.textContent = 'back'
     backButton.addEventListener('click', getFavoriteRecipes)
@@ -109,7 +109,7 @@ const displaySpecificRecipe = (data) => {
         instruction.textContent = data.step
         instructions.appendChild(instruction)
     }
-    
+
     _.map(JSON.parse(data.instructions)[0].steps, createInstructionsList)
 
     favoritesContainer.appendChild(recipeInfoEl)

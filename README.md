@@ -21,7 +21,7 @@ When the user goes to the My Favorites page, they'll be presented with every rec
 
 ## Credits
 
-I collaborated with Charles Hall (github link) on this website.
+The collaborators on this website are [Charles Hall](https://github.com/cspecialblackberry) and [Casey Newman](https://github.com/caseynewman).
 
 ## License
 

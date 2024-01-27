@@ -53,7 +53,6 @@ let storedRecipeAreas = []
 const createSelectOptions = async (select) => {
     const response = await fetch('/api/recipe');
     favorites = await response.json();
-    console.log(favorites)
     function createOption(data) {
         let option = document.createElement('option')
         option.setAttribute('value', data.name)
@@ -175,6 +174,7 @@ const displayStoredRecipes = (recipeArea, index) => {
         recipeIngredients.appendChild(ingredient)
     }
 
+    console.log(storedRecipes[index])
     _.map(JSON.parse(storedRecipes[index].ingredients), createIngredients)
 
     titleDiv.appendChild(recipeName)

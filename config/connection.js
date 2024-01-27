@@ -12,17 +12,15 @@ if (process.env.JAWSDB_URL) {
     process.env.DB_PASSWORD,
     {
       //casey and jonathan
-<<<<<<< HEAD
-=======
-      host: process.env.DB_HOST,
-      dialect: 'postgres',
-      port: 5432
+//       host: process.env.DB_HOST,
+//       dialect: 'postgres',
+//       port: 5432
       
-      //charles 
->>>>>>> 78b838f891c913c4affc41ddbf1a234e4a478489
-      // host: 'localhost',
-      // dialect: 'postgres',
-      // port: 5432
+//       //charles 
+
+//       // host: 'localhost',
+//       // dialect: 'postgres',
+//       // port: 5432
 
       //charles 
       host: 'localhost',

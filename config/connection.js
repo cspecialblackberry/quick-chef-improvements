@@ -23,14 +23,14 @@ if (process.env.JAWSDB_URL) {
 //       // port: 5432
 
       //charles 
-      host: 'localhost',
-      dialect: 'mariadb',
-      port: 3306
+      // host: 'localhost',
+      // dialect: 'mariadb',
+      // port: 3306
 
        //deployed 
-    //   host: process.env.DB_HOST,
-    //   dialect: 'postgres',
-    //   port: 5432
+      host: process.env.DB_HOST,
+      dialect: 'postgres',
+      port: 5432
     }
 
   );

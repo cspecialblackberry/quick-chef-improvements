@@ -270,7 +270,7 @@ h3 {
 /*meal planner*/
 
 .weekday-div {
-    background-color: #e85d04;
+    background-color: #FCB178;
     margin-top: 20px;
     display: flex; 
     padding: 20px;
@@ -406,7 +406,6 @@ h3 {
     }
 
     .weekday-section {
-        background-color: #e85d04;
         min-height: 390px;
         height: auto;
         display: flex;

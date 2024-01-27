@@ -27,8 +27,8 @@ const setUserSelections = (event) => {
     userSelections.includeIngredients = ingredientsInput.value.split(' ')
     userSelections.maxReadyTime = timeSlider.value
     userSelections.intolerances = intolerancesCheckBox.value.split(' ')
-    ingredientsInput.value = ''
-    timeSlider.value = 30
+    // ingredientsInput.value = ''
+    // timeSlider.value = 30
 }
 
 searchBtn.addEventListener('click', setUserSelections)

@@ -113,7 +113,6 @@ const clearRecipeArea = () => {
 
 //create various dom elements to display at-a-glance information about the selected recipe
 const displaySelectedRecipe = (data) => {
-    console.log(data)
     clearRecipeArea()
 
     const titleDiv = document.createElement('div')
@@ -155,6 +154,8 @@ const lookForStoredRecipes = (day) => {
 
 //iterates through the stored recipes and their recipe areas to display information again upon refresh
 const displayStoredRecipes = (recipeArea, index) => {
+    console.log(storedRecipes)
+    console.log(storedRecipeAreas)
     const titleDiv = document.createElement('div')
     const ingredientsDiv = document.createElement('section')
 

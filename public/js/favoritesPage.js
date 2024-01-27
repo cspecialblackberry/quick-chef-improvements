@@ -31,13 +31,16 @@ const displayFavRecipe = (recipeData) => {
     const commentsLabel = document.createElement('label');
     const commentEl = document.createElement('p');
 
+    console.log(favRecipesData)
+
     favRecipeName.innerHTML = `<button>${recipeData.name}</button>`;
     favRecipeName.setAttribute('class', 'recipe-name');
     favRecipeName.querySelector('button').setAttribute('data-recipe-id', recipeData.recipeId);
     favRecipeName.querySelector('button').addEventListener('click', function (event) {
         recipeID = event.target.getAttribute('data-recipe-id');
-        console.log(favRecipesData)
-        const specificRecipe = favRecipesData.find(getSpecificRecipe);
+        console.log(recipeID)
+        // const specificRecipe = favRecipesData.find(getSpecificRecipe);
+        const specificRecipe = _.find(favRecipesData, getSpecificRecipe);
         console.log(specificRecipe)
         displaySpecificRecipe(specificRecipe);
     });
@@ -109,7 +112,7 @@ const displaySpecificRecipe = (data) => {
         instruction.textContent = data.step
         instructions.appendChild(instruction)
     }
-
+    
     _.map(JSON.parse(data.instructions)[0].steps, createInstructionsList)
 
     favoritesContainer.appendChild(recipeInfoEl)

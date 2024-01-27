@@ -10,8 +10,8 @@ A new technology we worked with for this website was Lodash. We used the _.map()
 
 In our CSS, we utilized flexbox and media queries to create a clean and responsive design.
 
-![Quick Chef App]()
-[Deployed Website]()
+![Quick Chef App](/public/images/quick-chef-website.png)
+[Deployed Website](https://quick-chef-app.onrender.com/)
 
 ## Usage
 
@@ -22,15 +22,3 @@ When the user goes to the My Favorites page, they'll be presented with every rec
 ## Credits
 
 The collaborators on this website are [Charles Hall](https://github.com/cspecialblackberry) and [Casey Newman](https://github.com/caseynewman).
-
-## License
-
-The last section of a high-quality README file is the license. This lets other developers know what they can and cannot do with your project. If you need help choosing a license, refer to [https://choosealicense.com/](https://choosealicense.com/).
-
----
-
-🏆 The previous sections are the bare minimum, and your project will ultimately determine the content of this document. You might also want to consider adding the following sections.
-
-## Features
-
-If your project has a lot of features, list them here.

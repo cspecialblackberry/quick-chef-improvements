@@ -24,7 +24,6 @@ const getSpecificRecipe = (recipe) => {
 
 // appending favorite recipe results info to page
 const displayFavRecipe = (recipeData) => {
-    console.log(recipeData)
     const favRecipeEl = document.createElement('article');
     const favRecipeName = document.createElement('h2');
     const favRecipeImage = document.createElement('img');
@@ -33,7 +32,6 @@ const displayFavRecipe = (recipeData) => {
     const commentEl = document.createElement('p');
 
     favRecipeName.innerHTML = `<button>${recipeData.name}</button>`;
-    favRecipeName.textContent = recipeData.name
     favRecipeName.setAttribute('class', 'recipe-name');
     favRecipeName.querySelector('button').setAttribute('data-recipe-id', recipeData.recipeId);
     favRecipeName.querySelector('button').addEventListener('click', function (event) {
@@ -41,6 +39,7 @@ const displayFavRecipe = (recipeData) => {
         const specificRecipe = _.find(favRecipesData, getSpecificRecipe);
         displaySpecificRecipe(specificRecipe);
     });
+
     favRecipeImage.src = recipeData.image;
     commentInput.setAttribute('class', 'fav-comments');
     commentInput.setAttribute('placeholder', 'Jot down your notes!');
@@ -50,7 +49,6 @@ const displayFavRecipe = (recipeData) => {
 
     favoritesContainer.appendChild(favRecipeEl);
     favRecipeEl.appendChild(favRecipeName);
-    console.log(favRecipeName)
     favRecipeEl.appendChild(favRecipeImage);
     favRecipeEl.appendChild(commentsLabel);
     favRecipeEl.appendChild(commentInput);

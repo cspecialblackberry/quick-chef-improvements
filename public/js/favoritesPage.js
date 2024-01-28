@@ -32,18 +32,13 @@ const displayFavRecipe = (recipeData) => {
     const commentsLabel = document.createElement('label');
     const commentEl = document.createElement('p');
 
-    console.log(favRecipesData)
-
     favRecipeName.innerHTML = `<button>${recipeData.name}</button>`;
     favRecipeName.textContent = recipeData.name
     favRecipeName.setAttribute('class', 'recipe-name');
     favRecipeName.querySelector('button').setAttribute('data-recipe-id', recipeData.recipeId);
     favRecipeName.querySelector('button').addEventListener('click', function (event) {
         recipeID = event.target.getAttribute('data-recipe-id');
-        console.log(recipeID)
-        // const specificRecipe = favRecipesData.find(getSpecificRecipe);
         const specificRecipe = _.find(favRecipesData, getSpecificRecipe);
-        console.log(specificRecipe)
         displaySpecificRecipe(specificRecipe);
     });
     favRecipeImage.src = recipeData.image;
@@ -61,7 +56,6 @@ const displayFavRecipe = (recipeData) => {
     favRecipeEl.appendChild(commentInput);
     favRecipeEl.appendChild(commentEl)
     displayComments(commentEl, recipeData);
-    console.log(favRecipeEl)
 
     commentInput.addEventListener('keyup', function(event) {
         updateComments(event, recipeData, commentInput);
@@ -71,7 +65,6 @@ const displayFavRecipe = (recipeData) => {
 // appending specific recipe info to page
 const displaySpecificRecipe = (data) => {
     clearResultArea();
-    console.log(data)
     const backButton = document.createElement('button')
     backButton.textContent = 'back'
     backButton.addEventListener('click', getFavoriteRecipes)
@@ -137,7 +130,6 @@ const updateComments = (event, recipeData, commentInput) => {
     let commentEl = recipeEl.querySelector('.comments');
     if (event.key === 'Enter') {
         let comments = commentEl.textContent;
-        console.log(comments)
         if (comments.length > 0)  {
             recipeData.comments = commentEl.textContent;
             comments = recipeData.comments + ', ' + commentInput.value;

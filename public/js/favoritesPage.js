@@ -108,6 +108,7 @@ const displaySpecificRecipe = (data) => {
         instructions.appendChild(instruction)
     }
     
+    console.log(data.instructions);
     _.map(JSON.parse(data.instructions)[0].steps, createInstructionsList)
 
     favoritesContainer.appendChild(recipeInfoEl)

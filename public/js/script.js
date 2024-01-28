@@ -29,7 +29,7 @@ const setUserSelections = (event) => {
     userSelections.intolerances = intolerancesCheckBox.value.split(' ')
     pageIndex = 0
     ingredientsInput.value = ''
-    timeSlider.value = 30
+    timeSlider.value = 27
 }
 
 searchBtn.addEventListener('click', setUserSelections)

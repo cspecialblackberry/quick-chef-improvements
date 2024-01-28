@@ -28,8 +28,8 @@ const setUserSelections = (event) => {
     userSelections.maxReadyTime = timeSlider.value
     userSelections.intolerances = intolerancesCheckBox.value.split(' ')
     pageIndex = 0
-    // ingredientsInput.value = ''
-    // timeSlider.value = 30
+    ingredientsInput.value = ''
+    timeSlider.value = 30
 }
 
 searchBtn.addEventListener('click', setUserSelections)
@@ -82,7 +82,6 @@ const saveClickedID = (event) => {
 const getSpecificRecipe = async (recipeID) => {
     const response = await fetch(`https://api.spoonacular.com/recipes/${recipeID}/information?apiKey=44a9304fedc34c139bfc7622b4d3e00c`)
     const data = await response.json()
-    console.log(data)
     clearResultArea()
     clearPageButtonArea()
     displaySpecificRecipe(data)
@@ -234,6 +233,4 @@ const postRecipes = async (recipeObj) => {
     })
 
     const data = await response.json()
-
-    console.log(data)
 }

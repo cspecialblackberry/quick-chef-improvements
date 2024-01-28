@@ -27,6 +27,7 @@ const setUserSelections = (event) => {
     userSelections.includeIngredients = ingredientsInput.value.split(' ')
     userSelections.maxReadyTime = timeSlider.value
     userSelections.intolerances = intolerancesCheckBox.value.split(' ')
+    pageIndex = 0
     // ingredientsInput.value = ''
     // timeSlider.value = 30
 }
@@ -112,6 +113,7 @@ const runPreviousPage = () => {
 }
 
 const createPageButtons = () => {
+    clearPageButtonArea()
     const nextButton = document.createElement('button')
     nextButton.textContent = 'next'
     nextButton.addEventListener('click', runNextPage)

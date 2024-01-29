@@ -63,6 +63,8 @@ const displayFavRecipe = (recipeData) => {
 // appending specific recipe info to page
 const displaySpecificRecipe = (data) => {
     clearResultArea();
+    console.log(data)
+
     const backButton = document.createElement('button')
     backButton.textContent = 'back'
     backButton.addEventListener('click', getFavoriteRecipes)
@@ -79,7 +81,7 @@ const displaySpecificRecipe = (data) => {
     const instructionsTitle = document.createElement('h3')
     const instructions = document.createElement('ol')
 
-    recipeName.textContent = data.title
+    recipeName.textContent = data.name
     cookTime.textContent = "Ready in " + data.readyTime + " minutes."
     dietsTitle.textContent = "Diets:"
     recipeImage.src = data.image
@@ -109,6 +111,8 @@ const displaySpecificRecipe = (data) => {
     }
     
     _.map(JSON.parse(data.instructions.toString())[0].steps, createInstructionsList)
+
+    console.log(recipeName)
 
     favoritesContainer.appendChild(recipeInfoEl)
     recipeInfoEl.appendChild(recipeName)

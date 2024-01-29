@@ -63,7 +63,6 @@ const displayFavRecipe = (recipeData) => {
 // appending specific recipe info to page
 const displaySpecificRecipe = (data) => {
     clearResultArea();
-    console.log(data)
 
     const backButton = document.createElement('button')
     backButton.textContent = 'back'
@@ -111,8 +110,6 @@ const displaySpecificRecipe = (data) => {
     }
     
     _.map(JSON.parse(data.instructions.toString())[0].steps, createInstructionsList)
-
-    console.log(recipeName)
 
     favoritesContainer.appendChild(recipeInfoEl)
     recipeInfoEl.appendChild(recipeName)

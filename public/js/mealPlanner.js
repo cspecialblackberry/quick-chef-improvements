@@ -202,14 +202,17 @@ const deleteStoredRecipe = (event) => {
 }
 
 const debug = (recipe) => {
+    console.log(recipe)
     console.log((recipe.instructions.data[0]).toString())
 }
+
+
+_.map(recipeAreaArray, lookForStoredRecipes)
+_.map(storedRecipeAreas, displayStoredRecipes)
 
 debug(storedRecipes[0])
 
 _.map(storedRecipes, debug)
-_.map(recipeAreaArray, lookForStoredRecipes)
-_.map(storedRecipeAreas, displayStoredRecipes)
 
 
 sundayButton.addEventListener('click', matchSelectedFields)

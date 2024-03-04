@@ -205,6 +205,8 @@ const debug = (recipe) => {
     console.log((recipe.instructions.data[0]).toString())
 }
 
+debug(storedRecipes[0])
+
 _.map(storedRecipes, debug)
 _.map(recipeAreaArray, lookForStoredRecipes)
 _.map(storedRecipeAreas, displayStoredRecipes)

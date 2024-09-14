@@ -3,7 +3,10 @@ import { createRoot } from 'react-dom/client'
 import * as React from 'react'
 import App from './App.tsx'
 import Home from './pages/home.tsx'
-import './index.css'
+import Favorites from './pages/favorites.tsx';
+import MealPlanner from './pages/mealPlanner.tsx';
+import Login from './pages/login.tsx';
+import './reset.css'
 
 const router = createBrowserRouter([
   {
@@ -16,7 +19,19 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
+        element: <Login />
+      },
+      {
+        path: '/home',
         element: <Home />
+      },
+      {
+        path: '/favorites',
+        element: <Favorites />
+      },
+      {
+        path: '/meal_planner',
+        element: <MealPlanner />
       }
     ]
   }

@@ -6,7 +6,7 @@ import Home from './pages/home.tsx'
 import Favorites from './pages/favorites.tsx';
 import MealPlanner from './pages/mealPlanner.tsx';
 import Login from './pages/login.tsx';
-import './reset.css'
+import './App.css'
 
 const router = createBrowserRouter([
   {

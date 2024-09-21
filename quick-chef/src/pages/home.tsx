@@ -1,7 +1,9 @@
+import SearchFields from "../components/search-fields/searchFields"
+
 export default function Home() {
     return(
         <>
-            <h1>Quick Chef</h1>
+            <SearchFields/>
         </>
     )
 }
